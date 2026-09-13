@@ -1,0 +1,145 @@
+<title>株シミュレーション成績</title>
+<meta name="description" content="東証の値動き銘柄から機械的に選定した仮想デイトレードのシミュレーション成績(2026年9月、Claude運用)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f5f3ee; --surface:#ffffff; --surface-2:#eeece4; --border:#dcd8cd;
+  --text:#1c1b18; --text-muted:#6b6558;
+  --accent:#b5791a; --accent-soft:#f6e9d3;
+  --pos:#1a8f4c; --neg:#c73e3e;
+  --shadow: 0 1px 2px rgba(28,27,24,0.04), 0 8px 24px -12px rgba(28,27,24,0.12);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#12100c; --surface:#1c1a15; --surface-2:#242019; --border:#38332a;
+    --text:#f2efe6; --text-muted:#a89f8c;
+    --accent:#e8b45c; --accent-soft:#3a2f18;
+    --pos:#4ade80; --neg:#f0716a;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px -12px rgba(0,0,0,0.5);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#12100c; --surface:#1c1a15; --surface-2:#242019; --border:#38332a;
+  --text:#f2efe6; --text-muted:#a89f8c;
+  --accent:#e8b45c; --accent-soft:#3a2f18;
+  --pos:#4ade80; --neg:#f0716a;
+  --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px -12px rgba(0,0,0,0.5);
+}
+*{box-sizing:border-box;}
+body{background:var(--bg);color:var(--text);font-family:"Noto Sans JP","Zen Kaku Gothic New",sans-serif;line-height:1.6;}
+.wrap{max-width:900px;margin:0 auto;padding:32px 20px 80px;}
+.masthead{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:24px;padding-bottom:20px;border-bottom:1px solid var(--border);}
+h1{font-family:"Zen Kaku Gothic New",sans-serif;font-weight:900;font-size:26px;margin:0 0 4px;text-wrap:balance;}
+.sub{color:var(--text-muted);font-size:13px;}
+.badge{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--text-muted);background:var(--surface-2);border:1px solid var(--border);border-radius:6px;padding:6px 12px;white-space:nowrap;}
+
+.summary{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:24px;}
+.stat{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px 18px;box-shadow:var(--shadow);}
+.stat .k{font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px;}
+.stat .v{font-family:"JetBrains Mono",monospace;font-variant-numeric:tabular-nums;font-size:22px;font-weight:700;}
+.stat .v.pos{color:var(--pos);} .stat .v.neg{color:var(--neg);}
+
+.notice{background:var(--accent-soft);border:1px solid var(--accent);border-radius:10px;padding:14px 16px;font-size:12px;color:var(--text);margin-bottom:24px;line-height:1.7;}
+.notice b{color:var(--accent);}
+
+details.method{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px 18px;margin-bottom:24px;box-shadow:var(--shadow);}
+details.method summary{cursor:pointer;font-size:13px;font-weight:600;color:var(--text);}
+details.method ul{margin:10px 0 0;padding-left:20px;font-size:12px;color:var(--text-muted);display:flex;flex-direction:column;gap:5px;}
+
+.section-title{font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted);margin:0 0 12px;font-weight:600;}
+
+.trade-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;margin-bottom:12px;box-shadow:var(--shadow);overflow:hidden;}
+.trade-head{display:flex;justify-content:space-between;align-items:center;padding:12px 18px;background:var(--surface-2);gap:10px;flex-wrap:wrap;}
+.trade-head .date{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--text-muted);}
+.trade-head .name{font-weight:700;font-size:14px;}
+.dir-tag{font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:700;padding:2px 8px;border-radius:6px;background:var(--accent-soft);color:var(--accent);}
+.trade-pnl{font-family:"JetBrains Mono",monospace;font-weight:700;font-size:14px;margin-left:auto;}
+.trade-pnl.pos{color:var(--pos);} .trade-pnl.neg{color:var(--neg);}
+.trade-body{padding:12px 18px 16px;font-size:12px;}
+.trade-nums{font-family:"JetBrains Mono",monospace;font-variant-numeric:tabular-nums;color:var(--text-muted);margin-bottom:8px;}
+.trade-reason{color:var(--text-muted);line-height:1.7;border-top:1px dotted var(--border);padding-top:8px;}
+
+@media (max-width:640px){ .summary{grid-template-columns:1fr;} }
+</style>
+
+<div class="wrap">
+  <div class="masthead">
+    <div>
+      <h1>株シミュレーション成績</h1>
+      <div class="sub">東証の値動き銘柄から機械的に選定した仮想デイトレード — Claudeによる裁量シミュレーション</div>
+    </div>
+    <div class="badge" id="period-badge">2026/09/01 – 09/11</div>
+  </div>
+
+  <div class="notice">
+    <b>これは実在の取引ではありません。</b> 「同じ期間・同じ元手でClaudeが株デイトレードをしていたら」という仮想シミュレーションです。実在のYahoo!ファイナンス分足データ(取得できる範囲)を使用し、後知恵なしで機械的にルールを適用していますが、銘柄プールや売買ルール自体はClaudeが設計した裁量的なものです。
+  </div>
+
+  <div class="summary">
+    <div class="stat"><div class="k">累計損益</div><div class="v" id="cum-pnl">—</div></div>
+    <div class="stat"><div class="k">累計資産</div><div class="v" id="cum-eq">—</div></div>
+    <div class="stat"><div class="k">勝敗</div><div class="v" id="win-loss">—</div></div>
+  </div>
+
+  <details class="method">
+    <summary>シミュレーションのルール(クリックで詳細)</summary>
+    <ul>
+      <li><b>銘柄プール:</b> 東証の主要銘柄約90(自動車・電機・商社・金融・素材・小売、自動運転/先進技術テーマ)に加え、Yahoo!ファイナンスの実際の「値上がり率ランキング」「出来高急増ランキング」から抽出した無名・グロース株50銘柄を追加(計約140銘柄)。</li>
+      <li><b>ランキングの限界(正直な注記):</b> Yahoo!ファイナンスのランキングは当日時点のライブ情報のみで、過去日(9/1〜9/11)の実際のランキングを遡って取得することはできない。そのためこの50銘柄は「取得作業を行った時点(9/13)のランキング」から拾った実在の値動き銘柄をプールに加えたものであり、各シミュレーション日ごとにその日のランキングを再現したものではない。プール入り後の毎日の選定自体は、その日その時点までの実データのみで機械的に行っており後知恵はない。</li>
+      <li><b>トレンドフィルター(v2追加):</b> その銘柄自身の分足EMA9/EMA20を算出し、9:00〜10:00の値動きの方向とEMAトレンドの方向が一致する銘柄だけを候補にする(FXの15分足トレンドフィルターと同じ発想。だましブレイクの抑制が目的)。</li>
+      <li><b>出来高スクリーニング(v6で修正):</b> 直近5営業日の同時刻帯平均出来高に対する倍率(相対出来高)が1.3倍未満の銘柄は候補から除外(必須条件)。以前は「1.3倍以上かどうか」の足切りのみで、その中の順位は値動きの大きさで決めていたため「出来高が増えている銘柄を優先」という説明と実態がずれていた(ユーザー指摘、2026-09-13修正)。現在は通過した銘柄の中を相対出来高が大きい順にランキングする。</li>
+      <li><b>選定:</b> 上記フィルターを通過し出来高倍率が最大の銘柄から順に、実際に建てられる(下記の資金管理を満たす)銘柄を選定。</li>
+      <li><b>1日1トレードに確定(v5、データに基づく判断):</b> v4で日中複数回売買を試したところ、実は「同日中の再エントリー」だけを見ると平均-57円/件の負け越しで、「その日最初のトレード」だけなら平均+606円/件の勝ち越しだった。回数を増やすほど根拠の弱い(ランキング下位の)銘柄まで拾ってしまい、質が薄まって総利益がむしろ減ることが判明したため、「1日1トレードまで」に確定。ただし決済ロジック自体は残し、30分ごとの再ランキングで最初の1回が出るまで粘る(候補や対象銘柄が日中で入れ替わる余地は残る)。</li>
+      <li><b>静観ロジック:</b> トレンドが崩れた/不明瞭、または候補がブレイクせず条件を満たさない間は「静観」とし、各トレードの「経緯」欄にその間何を検討し何が不成立だったかを記録する。基準を緩めての無理なエントリーはしない。</li>
+      <li><b>エントリー:</b> 直近30分のレンジを30分以内にブレイクした方向に、次の足の始値で成行エントリー(ブレイクが遅れた場合はそのタイミングを見送り、次の再ランキングへ)。</li>
+      <li><b>SL/TP:</b> SL=ブレイク直前の押し目/戻り安値高値、TP=SL幅×2(リスクリワード1:2)。</li>
+      <li><b>手仕舞い:</b> 信用デイトレのため同日中に決済。SL/TP未達なら大引け前に強制決済。</li>
+      <li><b>資金管理(v7で変更):</b> 元手100,000円。1%リスクルールは撤廃(ユーザー指示、2026-09-13)し、SL幅に関係なく毎回レバレッジ上限3.3倍(楽天証券の信用取引を前提)いっぱいでポジションを建てる方式に変更。</li>
+      <li><b>SL幅フィルター(v8追加):</b> 全力レバレッジ下ではSL幅(%)がそのままトレードの資産%リスクに直結する(リスク%=SL幅%×3.3)。SL幅が価格の2%を超えるセットアップは見送り、次点の候補を試す。v7では2件がSL幅5.5%・7.9%となり資産の12〜26%を単発で失っていたが、この足切りで解消。</li>
+      <li><b>データ制約:</b> 無料データのため分足の取得期間に制限があり、Yahoo!ファイナンスで取得できた2分足を使用。</li>
+    </ul>
+  </details>
+
+  <div class="section-title">トレード一覧</div>
+  <div id="trades"></div>
+</div>
+
+<script>
+const TRADES = [{"date": "2026-09-01", "ticker": "7814.T", "name": "(株)日本創発グループ", "dir": "LONG", "entry_time": "10:42", "entry": 637.0, "sl": 636.0, "tp": 639.0, "shares": 500, "exit_time": "10:42", "exit_price": 636.0, "exit_reason": "SL", "pnl": -500.0, "equity_after": 99500.0, "reason": {"decision_time": "09:58", "day_open": 630.0, "pct_move_at_decision": 0.95, "range_high": 636.0, "range_low": 632.0, "breakout_time": "10:30", "breakout_close": 637.0, "rel_volume": 23.3, "gap_reason": "当日始動(9:00始値基準)。10:00の初回スキャンで条件成立。", "top3": [{"ticker": "7814.T", "name": "(株)日本創発グループ", "pct": 0.95, "relvol": 23.3}, {"ticker": "4667.T", "name": "アイサンテクノロジー(株)", "pct": -6.37, "relvol": 4.1}, {"ticker": "5401.T", "name": "日本製鉄", "pct": 1.44, "relvol": 3.35}]}}, {"date": "2026-09-02", "ticker": "9130.T", "name": "共栄タンカー(株)", "dir": "SHORT", "entry_time": "10:12", "entry": 1590.0, "sl": 1605.0, "tp": 1560.0, "shares": 200, "exit_time": "13:08", "exit_price": 1560.0, "exit_reason": "TP", "pnl": 6000.0, "equity_after": 105500.0, "reason": {"decision_time": "10:00", "day_open": 1687.0, "pct_move_at_decision": -5.16, "range_high": 1630.0, "range_low": 1591.0, "breakout_time": "10:08", "breakout_close": 1590.0, "rel_volume": 3.35, "gap_reason": "当日始動(9:00始値基準)。10:00の初回スキャンで条件成立。", "top3": [{"ticker": "4976.T", "name": "東洋ドライルーブ(株)", "pct": 12.87, "relvol": 30.6}, {"ticker": "6203.T", "name": "豊和工業(株)", "pct": -2.46, "relvol": 15.9}, {"ticker": "1948.T", "name": "(株)弘電社", "pct": 0.09, "relvol": 12.92}]}}, {"date": "2026-09-03", "ticker": "4661.T", "name": "オリエンタルランド", "dir": "LONG", "entry_time": "10:16", "entry": 3053.0, "sl": 3030.0, "tp": 3099.0, "shares": 100, "exit_time": "10:28", "exit_price": 3099.0, "exit_reason": "TP", "pnl": 4600.0, "equity_after": 110100.0, "reason": {"decision_time": "10:00", "day_open": 3003.0, "pct_move_at_decision": 1.13, "range_high": 3048.0, "range_low": 3018.0, "breakout_time": "10:14", "breakout_close": 3052.0, "rel_volume": 1.93, "gap_reason": "当日始動(9:00始値基準)。10:00の初回スキャンで条件成立。", "top3": [{"ticker": "3187.T", "name": "(株)ミラタップ", "pct": 3.98, "relvol": 5.8}, {"ticker": "4274.T", "name": "細谷火工(株)", "pct": -1.03, "relvol": 4.52}, {"ticker": "5031.T", "name": "モイ(株)", "pct": -1.78, "relvol": 4.23}]}}, {"date": "2026-09-04", "ticker": "3187.T", "name": "(株)ミラタップ", "dir": "LONG", "entry_time": "10:20", "entry": 383.0, "sl": 380.0, "tp": 389.0, "shares": 900, "exit_time": "10:22", "exit_price": 380.0, "exit_reason": "SL", "pnl": -2700.0, "equity_after": 107400.0, "reason": {"decision_time": "09:56", "day_open": 362.0, "pct_move_at_decision": 4.97, "range_high": 382.0, "range_low": 371.0, "breakout_time": "10:10", "breakout_close": 384.0, "rel_volume": 3.03, "gap_reason": "当日始動(9:00始値基準)。10:00の初回スキャンで条件成立。", "top3": [{"ticker": "4382.T", "name": "HEROZ", "pct": 1.06, "relvol": 3.26}, {"ticker": "9984.T", "name": "ソフトバンクグループ", "pct": 1.1, "relvol": 3.23}, {"ticker": "3187.T", "name": "(株)ミラタップ", "pct": 4.97, "relvol": 3.03}]}}, {"date": "2026-09-07", "ticker": "6336.T", "name": "(株)石井表記", "dir": "LONG", "entry_time": "10:06", "entry": 1996.0, "sl": 1972.0, "tp": 2044.0, "shares": 100, "exit_time": "10:26", "exit_price": 1972.0, "exit_reason": "SL", "pnl": -2400.0, "equity_after": 105000.0, "reason": {"decision_time": "10:00", "day_open": 1900.0, "pct_move_at_decision": 3.79, "range_high": 1990.0, "range_low": 1963.0, "breakout_time": "10:04", "breakout_close": 1995.0, "rel_volume": 2.86, "gap_reason": "当日始動(9:00始値基準)。10:00の初回スキャンで条件成立。", "top3": [{"ticker": "6336.T", "name": "(株)石井表記", "pct": 3.79, "relvol": 2.86}, {"ticker": "3121.T", "name": "マーチャント・バンカーズ(株)", "pct": -3.72, "relvol": 2.44}, {"ticker": "6963.T", "name": "ローム", "pct": 2.7, "relvol": 2.07}]}}, {"date": "2026-09-08", "ticker": "4427.T", "name": "(株)ＥｄｕＬａｂ", "dir": "LONG", "entry_time": "11:02", "entry": 236.0, "sl": 235.0, "tp": 238.0, "shares": 1400, "exit_time": "11:04", "exit_price": 238.0, "exit_reason": "TP", "pnl": 2800.0, "equity_after": 107800.0, "reason": {"decision_time": "10:26", "day_open": 230.0, "pct_move_at_decision": 2.17, "range_high": 235.0, "range_low": 234.0, "breakout_time": "10:52", "breakout_close": 236.0, "rel_volume": 1.97, "gap_reason": "当日始動(9:00始値基準)。10:00時点: 候補(株)ｆａｎｔａｓｉｓｔａ,豊和工業(株),(株)ＥｄｕＬａｂを検討したがブレイク不成立/資金管理条件未達、静観継続。", "top3": [{"ticker": "1783.T", "name": "(株)ｆａｎｔａｓｉｓｔａ", "pct": 6.56, "relvol": 35.75}, {"ticker": "6203.T", "name": "豊和工業(株)", "pct": 1.27, "relvol": 32.42}, {"ticker": "4382.T", "name": "HEROZ", "pct": 2.13, "relvol": 4.67}]}}, {"date": "2026-09-09", "ticker": "5301.T", "name": "東海カーボン", "dir": "LONG", "entry_time": "10:08", "entry": 1908.5, "sl": 1896.0, "tp": 1933.5, "shares": 100, "exit_time": "10:24", "exit_price": 1933.5, "exit_reason": "TP", "pnl": 2500.0, "equity_after": 110300.0, "reason": {"decision_time": "10:00", "day_open": 1875.0, "pct_move_at_decision": 1.25, "range_high": 1904.5, "range_low": 1870.5, "breakout_time": "10:06", "breakout_close": 1908.5, "rel_volume": 2.28, "gap_reason": "当日始動(9:00始値基準)。10:00の初回スキャンで条件成立。", "top3": [{"ticker": "6400.T", "name": "不二精機(株)", "pct": -0.36, "relvol": 8.0}, {"ticker": "6203.T", "name": "豊和工業(株)", "pct": 2.75, "relvol": 5.15}, {"ticker": "1783.T", "name": "(株)ｆａｎｔａｓｉｓｔａ", "pct": 1.41, "relvol": 4.4}]}}, {"date": "2026-09-10", "ticker": "4427.T", "name": "(株)ＥｄｕＬａｂ", "dir": "SHORT", "entry_time": "13:28", "entry": 225.0, "sl": 227.0, "tp": 221.0, "shares": 1600, "exit_time": "13:36", "exit_price": 227.0, "exit_reason": "SL", "pnl": -3200.0, "equity_after": 107100.0, "reason": {"decision_time": "13:00", "day_open": 226.0, "pct_move_at_decision": -1.33, "range_high": 232.0, "range_low": 222.0, "breakout_time": "13:20", "breakout_close": 220.0, "rel_volume": 2.96, "gap_reason": "当日始動(9:00始値基準)。10:00時点: 候補テックファームホールディングス(株),(株)ＥｄｕＬａｂ,(株)ｆａｎｔａｓｉｓｔａを検討したがブレイク不成立/資金管理条件未達、静観継続; 10:30時点: 候補テックファームホールディングス(株),(株)ＥｄｕＬａｂ,(株)ｆａｎｔａｓｉｓｔａを検討したがブレイク不成立/資金管理条件未達、静観継続; 11:00時点: 候補テックファームホールディングス(株),(株)ＥｄｕＬａｂ,モイ(株)を検討したがブレイク不成立/資金管理条件未達、静観継続; 11:30時点: 候補ＧＭＯプライム・ストラテジー(株),モイ(株),(株)ＥｄｕＬａｂを検討したがブレイク不成立/資金管理条件未達、静観継続; 12:00時点: トレンド一致銘柄なし、静観継続; 12:30時点: トレンド一致銘柄なし、静観継続。", "top3": [{"ticker": "5533.T", "name": "(株)エリッツホールディングス", "pct": 2.8, "relvol": 8.4}, {"ticker": "6696.T", "name": "(株)トラース・オン・プロダクト", "pct": -3.8, "relvol": 6.2}, {"ticker": "4427.T", "name": "(株)ＥｄｕＬａｂ", "pct": -1.33, "relvol": 2.96}]}}, {"date": "2026-09-11", "ticker": "7042.T", "name": "(株)アクセスグループ・ホールディングス", "dir": "LONG", "entry_time": "10:16", "entry": 706.0, "sl": 696.0, "tp": 726.0, "shares": 500, "exit_time": "10:46", "exit_price": 726.0, "exit_reason": "TP", "pnl": 10000.0, "equity_after": 117100.0, "reason": {"decision_time": "10:00", "day_open": 694.0, "pct_move_at_decision": 1.01, "range_high": 701.0, "range_low": 696.0, "breakout_time": "10:08", "breakout_close": 707.0, "rel_volume": 17.55, "gap_reason": "当日始動(9:00始値基準)。10:00の初回スキャンで条件成立。", "top3": [{"ticker": "2459.T", "name": "アウンコンサルティング(株)", "pct": -9.18, "relvol": 269.8}, {"ticker": "6696.T", "name": "(株)トラース・オン・プロダクト", "pct": 2.68, "relvol": 51.23}, {"ticker": "4599.T", "name": "(株)ステムリム", "pct": -9.18, "relvol": 28.32}]}}];
+const START_EQUITY = 100000;
+
+function yen(n){ const s=Math.round(Math.abs(n)).toLocaleString('en-US'); return (n<0?'-':'+')+s+'円'; }
+function pnlClass(n){ return n>=0?'pos':'neg'; }
+
+const last = TRADES[TRADES.length-1];
+const cumPnl = last.equity_after - START_EQUITY;
+document.getElementById('cum-pnl').textContent = yen(cumPnl);
+document.getElementById('cum-pnl').className = 'v ' + pnlClass(cumPnl);
+document.getElementById('cum-eq').textContent = Math.round(last.equity_after).toLocaleString('en-US')+'円';
+const wins = TRADES.filter(t=>t.pnl>=0).length, losses = TRADES.filter(t=>t.pnl<0).length;
+document.getElementById('win-loss').textContent = `${wins}勝${losses}敗`;
+
+const el = document.getElementById('trades');
+TRADES.forEach(t=>{
+  const r = t.reason;
+  const relVolNote = r.rel_volume ? `直近5営業日平均比 出来高${r.rel_volume}倍。` : '';
+  const entryDetail = `${r.decision_time}時点の直近30分レンジ(高値${r.range_high}円/安値${r.range_low}円、始値${r.day_open}円からの騰落率${r.pct_move_at_decision>0?'+':''}${r.pct_move_at_decision.toFixed(2)}%、${relVolNote}EMAトレンドと同方向)を、${r.breakout_time}に${r.pct_move_at_decision>0?'上抜け':'下抜け'}(終値${r.breakout_close}円)、次の足の始値でエントリー。`;
+  const gap = r.gap_reason || '';
+  const card = document.createElement('div');
+  card.className = 'trade-card';
+  card.innerHTML = `
+    <div class="trade-head">
+      <span class="date">${t.date}</span>
+      <span class="name">${t.ticker} ${t.name}</span>
+      <span class="dir-tag">${t.dir}</span>
+      <span class="trade-pnl ${pnlClass(t.pnl)}">${yen(t.pnl)}</span>
+    </div>
+    <div class="trade-body">
+      <div class="trade-nums">${t.entry_time} Entry ${t.entry}円 / SL ${t.sl}円 / TP ${t.tp}円 / ${t.shares.toLocaleString()}株 &nbsp;→&nbsp; ${t.exit_time} ${t.exit_reason} Exit ${t.exit_price}円</div>
+      <div class="trade-reason"><b>経緯:</b> ${gap}<br><b>根拠:</b> ${entryDetail}</div>
+    </div>
+  `;
+  el.appendChild(card);
+});
+</script>
