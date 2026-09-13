@@ -119,8 +119,13 @@ def size_position(equity, entry_price, sl_price):
 
 
 def rank_candidates_at(data, d, scan_ts):
-    """Trend + volume qualified candidates as of scan_ts, ranked by volume-surge first
-    then |move since day open|. Returns list of dicts (possibly empty -> standby)."""
+    """Trend-qualified candidates as of scan_ts that clear the volume-surge gate
+    (rel_vol >= VOL_SURGE is a hard requirement, not a soft preference -- a candidate
+    with a bigger price move but no real volume surge is excluded outright), then
+    ranked by the volume-surge magnitude itself, biggest first. Returns list of dicts
+    (possibly empty -> standby). Previously this sorted by |price move| with volume
+    only as a soft tie-break, which didn't actually prioritize "increasing volume"
+    stocks despite being described that way -- fixed 2026-09-13 per user feedback."""
     out = []
     for ticker, df in data.items():
         day_df = df[df["date"] == d]
@@ -137,6 +142,8 @@ def rank_candidates_at(data, d, scan_ts):
         if trend_dir != want_dir or abs(pct) < 1e-6:
             continue
         rel_vol = relative_volume(df, d, last_row["ts_jst"])
+        if rel_vol is None or rel_vol < VOL_SURGE:
+            continue  # hard gate: must actually be a volume surge, not just a big mover
         range_df = up_to[up_to["ts_jst"] > scan_ts - ROLL_RANGE]
         if len(range_df) < 2:
             continue
@@ -145,7 +152,7 @@ def rank_candidates_at(data, d, scan_ts):
             "range_high": range_df["high"].max(), "range_low": range_df["low"].min(),
             "day_open": day_open, "scan_ts": last_row["ts_jst"],
         })
-    out.sort(key=lambda c: (0 if (c["rel_vol"] is not None and c["rel_vol"] >= VOL_SURGE) else 1, -abs(c["pct"])))
+    out.sort(key=lambda c: -c["rel_vol"])
     return out
 
 

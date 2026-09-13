@@ -1,30 +1,36 @@
 [
   {
     "date": "2026-09-01",
-    "ticker": "6178.T",
-    "name": "日本郵政",
+    "ticker": "7814.T",
+    "name": "(株)日本創発グループ",
     "dir": "LONG",
-    "entry_time": "10:26",
-    "entry": 2518.5,
-    "sl": 2507.0,
-    "tp": 2541.5,
-    "shares": 100,
-    "exit_time": "14:28",
-    "exit_price": 2541.5,
-    "exit_reason": "TP",
-    "pnl": 2300.0,
-    "equity_after": 102300.0,
+    "entry_time": "10:42",
+    "entry": 637.0,
+    "sl": 636.0,
+    "tp": 639.0,
+    "shares": 500,
+    "exit_time": "10:42",
+    "exit_price": 636.0,
+    "exit_reason": "SL",
+    "pnl": -500.0,
+    "equity_after": 99500.0,
     "reason": {
-      "decision_time": "10:00",
-      "day_open": 2456.5,
-      "pct_move_at_decision": 2.16,
-      "range_high": 2517.0,
-      "range_low": 2491.5,
-      "breakout_time": "10:24",
-      "breakout_close": 2518.5,
-      "rel_volume": 1.99,
+      "decision_time": "09:58",
+      "day_open": 630.0,
+      "pct_move_at_decision": 0.95,
+      "range_high": 636.0,
+      "range_low": 632.0,
+      "breakout_time": "10:30",
+      "breakout_close": 637.0,
+      "rel_volume": 23.3,
       "gap_reason": "当日始動(9:00始値基準)。10:00の初回スキャンで条件成立。",
       "top3": [
+        {
+          "ticker": "7814.T",
+          "name": "(株)日本創発グループ",
+          "pct": 0.95,
+          "relvol": 23.3
+        },
         {
           "ticker": "4667.T",
           "name": "アイサンテクノロジー(株)",
@@ -32,16 +38,10 @@
           "relvol": 4.1
         },
         {
-          "ticker": "4382.T",
-          "name": "HEROZ",
-          "pct": -2.39,
-          "relvol": 2.34
-        },
-        {
-          "ticker": "9501.T",
-          "name": "東京電力HD",
-          "pct": 2.35,
-          "relvol": 1.63
+          "ticker": "5401.T",
+          "name": "日本製鉄",
+          "pct": 1.44,
+          "relvol": 3.35
         }
       ]
     }
@@ -60,7 +60,7 @@
     "exit_price": 1560.0,
     "exit_reason": "TP",
     "pnl": 3000.0,
-    "equity_after": 105300.0,
+    "equity_after": 102500.0,
     "reason": {
       "decision_time": "10:00",
       "day_open": 1687.0,
@@ -79,52 +79,46 @@
           "relvol": 30.6
         },
         {
-          "ticker": "4667.T",
-          "name": "アイサンテクノロジー(株)",
-          "pct": 11.19,
-          "relvol": 1.32
+          "ticker": "6203.T",
+          "name": "豊和工業(株)",
+          "pct": -2.46,
+          "relvol": 15.9
         },
         {
-          "ticker": "5711.T",
-          "name": "三菱マテリアル",
-          "pct": -5.38,
-          "relvol": 1.35
+          "ticker": "1948.T",
+          "name": "(株)弘電社",
+          "pct": 0.09,
+          "relvol": 12.92
         }
       ]
     }
   },
   {
     "date": "2026-09-03",
-    "ticker": "4381.T",
-    "name": "ビープラッツ(株)",
-    "dir": "SHORT",
-    "entry_time": "10:34",
-    "entry": 262.0,
-    "sl": 268.0,
-    "tp": 250.0,
-    "shares": 200,
-    "exit_time": "15:24",
-    "exit_price": 258.0,
-    "exit_reason": "大引け前手仕舞い",
-    "pnl": 800.0,
-    "equity_after": 106100.0,
+    "ticker": "5401.T",
+    "name": "日本製鉄",
+    "dir": "LONG",
+    "entry_time": "10:12",
+    "entry": 713.3,
+    "sl": 709.5,
+    "tp": 720.9,
+    "shares": 300,
+    "exit_time": "15:02",
+    "exit_price": 709.5,
+    "exit_reason": "SL",
+    "pnl": -1140.0,
+    "equity_after": 101360.0,
     "reason": {
-      "decision_time": "09:58",
-      "day_open": 275.0,
-      "pct_move_at_decision": -2.91,
-      "range_high": 269.0,
-      "range_low": 263.0,
-      "breakout_time": "10:30",
-      "breakout_close": 262.0,
-      "rel_volume": 1.5,
+      "decision_time": "10:00",
+      "day_open": 705.1,
+      "pct_move_at_decision": 0.64,
+      "range_high": 712.9,
+      "range_low": 707.6,
+      "breakout_time": "10:10",
+      "breakout_close": 713.4,
+      "rel_volume": 1.86,
       "gap_reason": "当日始動(9:00始値基準)。10:00の初回スキャンで条件成立。",
       "top3": [
-        {
-          "ticker": "6081.T",
-          "name": "アライドアーキテクツ(株)",
-          "pct": -4.29,
-          "relvol": 2.49
-        },
         {
           "ticker": "3187.T",
           "name": "(株)ミラタップ",
@@ -132,10 +126,16 @@
           "relvol": 5.8
         },
         {
-          "ticker": "4381.T",
-          "name": "ビープラッツ(株)",
-          "pct": -2.91,
-          "relvol": 1.5
+          "ticker": "4274.T",
+          "name": "細谷火工(株)",
+          "pct": -1.03,
+          "relvol": 4.52
+        },
+        {
+          "ticker": "5031.T",
+          "name": "モイ(株)",
+          "pct": -1.78,
+          "relvol": 4.23
         }
       ]
     }
@@ -149,12 +149,12 @@
     "entry": 383.0,
     "sl": 380.0,
     "tp": 389.0,
-    "shares": 400,
+    "shares": 300,
     "exit_time": "10:22",
     "exit_price": 380.0,
     "exit_reason": "SL",
-    "pnl": -1200.0,
-    "equity_after": 104900.0,
+    "pnl": -900.0,
+    "equity_after": 100460.0,
     "reason": {
       "decision_time": "09:56",
       "day_open": 362.0,
@@ -167,63 +167,63 @@
       "gap_reason": "当日始動(9:00始値基準)。10:00の初回スキャンで条件成立。",
       "top3": [
         {
-          "ticker": "2764.T",
-          "name": "(株)ひらまつ",
-          "pct": 5.0,
-          "relvol": 1.49
+          "ticker": "4382.T",
+          "name": "HEROZ",
+          "pct": 1.06,
+          "relvol": 3.26
+        },
+        {
+          "ticker": "9984.T",
+          "name": "ソフトバンクグループ",
+          "pct": 1.1,
+          "relvol": 3.23
         },
         {
           "ticker": "3187.T",
           "name": "(株)ミラタップ",
           "pct": 4.97,
           "relvol": 3.03
-        },
-        {
-          "ticker": "8058.T",
-          "name": "三菱商事",
-          "pct": -3.02,
-          "relvol": 2.94
         }
       ]
     }
   },
   {
     "date": "2026-09-07",
-    "ticker": "5301.T",
-    "name": "東海カーボン",
-    "dir": "LONG",
-    "entry_time": "10:36",
-    "entry": 1915.5,
-    "sl": 1910.5,
-    "tp": 1925.5,
-    "shares": 100,
-    "exit_time": "10:38",
-    "exit_price": 1910.5,
+    "ticker": "7777.T",
+    "name": "(株)スリー・ディー・マトリックス",
+    "dir": "SHORT",
+    "entry_time": "11:00",
+    "entry": 351.0,
+    "sl": 355.0,
+    "tp": 343.0,
+    "shares": 300,
+    "exit_time": "11:28",
+    "exit_price": 355.0,
     "exit_reason": "SL",
-    "pnl": -500.0,
-    "equity_after": 104400.0,
+    "pnl": -1200.0,
+    "equity_after": 99260.0,
     "reason": {
       "decision_time": "10:30",
-      "day_open": 1859.5,
-      "pct_move_at_decision": 2.9,
-      "range_high": 1915.0,
-      "range_low": 1883.5,
-      "breakout_time": "10:34",
-      "breakout_close": 1916.0,
-      "rel_volume": 1.37,
-      "gap_reason": "当日始動(9:00始値基準)。10:00時点: 候補(株)石井表記,マーチャント・バンカーズ(株),レーザーテックを検討したがブレイク不成立/資金管理条件未達、静観継続。",
+      "day_open": 362.0,
+      "pct_move_at_decision": -2.21,
+      "range_high": 357.0,
+      "range_low": 352.0,
+      "breakout_time": "10:58",
+      "breakout_close": 351.0,
+      "rel_volume": 2.1,
+      "gap_reason": "当日始動(9:00始値基準)。10:00時点: 候補(株)石井表記,マーチャント・バンカーズ(株),ロームを検討したがブレイク不成立/資金管理条件未達、静観継続。",
       "top3": [
         {
-          "ticker": "3121.T",
-          "name": "マーチャント・バンカーズ(株)",
-          "pct": -5.58,
-          "relvol": 2.64
+          "ticker": "1783.T",
+          "name": "(株)ｆａｎｔａｓｉｓｔａ",
+          "pct": 1.96,
+          "relvol": 9.87
         },
         {
-          "ticker": "6920.T",
-          "name": "レーザーテック",
-          "pct": 4.59,
-          "relvol": 1.74
+          "ticker": "4427.T",
+          "name": "(株)ＥｄｕＬａｂ",
+          "pct": 1.79,
+          "relvol": 3.5
         },
         {
           "ticker": "6336.T",
@@ -236,94 +236,94 @@
   },
   {
     "date": "2026-09-08",
-    "ticker": "7276.T",
-    "name": "小糸製作所",
-    "dir": "SHORT",
-    "entry_time": "10:22",
-    "entry": 2646.5,
-    "sl": 2659.5,
-    "tp": 2620.5,
-    "shares": 100,
-    "exit_time": "12:34",
-    "exit_price": 2620.5,
+    "ticker": "4427.T",
+    "name": "(株)ＥｄｕＬａｂ",
+    "dir": "LONG",
+    "entry_time": "11:02",
+    "entry": 236.0,
+    "sl": 235.0,
+    "tp": 238.0,
+    "shares": 1000,
+    "exit_time": "11:04",
+    "exit_price": 238.0,
     "exit_reason": "TP",
-    "pnl": 2600.0,
-    "equity_after": 107000.0,
+    "pnl": 2000.0,
+    "equity_after": 101260.0,
     "reason": {
-      "decision_time": "10:00",
-      "day_open": 2712.5,
-      "pct_move_at_decision": -2.03,
-      "range_high": 2666.0,
-      "range_low": 2648.0,
-      "breakout_time": "10:20",
-      "breakout_close": 2647.0,
-      "rel_volume": 1.47,
-      "gap_reason": "当日始動(9:00始値基準)。10:00の初回スキャンで条件成立。",
+      "decision_time": "10:26",
+      "day_open": 230.0,
+      "pct_move_at_decision": 2.17,
+      "range_high": 235.0,
+      "range_low": 234.0,
+      "breakout_time": "10:52",
+      "breakout_close": 236.0,
+      "rel_volume": 1.97,
+      "gap_reason": "当日始動(9:00始値基準)。10:00時点: 候補(株)ｆａｎｔａｓｉｓｔａ,豊和工業(株),(株)ＥｄｕＬａｂを検討したがブレイク不成立/資金管理条件未達、静観継続。",
       "top3": [
-        {
-          "ticker": "9984.T",
-          "name": "ソフトバンクグループ",
-          "pct": 5.09,
-          "relvol": 2.59
-        },
         {
           "ticker": "1783.T",
           "name": "(株)ｆａｎｔａｓｉｓｔａ",
-          "pct": 4.92,
-          "relvol": 40.83
+          "pct": 6.56,
+          "relvol": 35.75
         },
         {
           "ticker": "6203.T",
           "name": "豊和工業(株)",
-          "pct": -4.74,
-          "relvol": 25.83
+          "pct": 1.27,
+          "relvol": 32.42
+        },
+        {
+          "ticker": "4382.T",
+          "name": "HEROZ",
+          "pct": 2.13,
+          "relvol": 4.67
         }
       ]
     }
   },
   {
     "date": "2026-09-09",
-    "ticker": "2432.T",
-    "name": "DeNA",
-    "dir": "SHORT",
-    "entry_time": "10:04",
-    "entry": 2540.0,
-    "sl": 2544.0,
-    "tp": 2532.0,
+    "ticker": "5301.T",
+    "name": "東海カーボン",
+    "dir": "LONG",
+    "entry_time": "10:08",
+    "entry": 1908.5,
+    "sl": 1896.0,
+    "tp": 1933.5,
     "shares": 100,
-    "exit_time": "10:28",
-    "exit_price": 2532.0,
+    "exit_time": "10:24",
+    "exit_price": 1933.5,
     "exit_reason": "TP",
-    "pnl": 800.0,
-    "equity_after": 107800.0,
+    "pnl": 2500.0,
+    "equity_after": 103760.0,
     "reason": {
       "decision_time": "10:00",
-      "day_open": 2610.5,
-      "pct_move_at_decision": -2.7,
-      "range_high": 2574.0,
-      "range_low": 2540.0,
-      "breakout_time": "10:02",
-      "breakout_close": 2539.5,
-      "rel_volume": 1.38,
+      "day_open": 1875.0,
+      "pct_move_at_decision": 1.25,
+      "range_high": 1904.5,
+      "range_low": 1870.5,
+      "breakout_time": "10:06",
+      "breakout_close": 1908.5,
+      "rel_volume": 2.28,
       "gap_reason": "当日始動(9:00始値基準)。10:00の初回スキャンで条件成立。",
       "top3": [
         {
-          "ticker": "4667.T",
-          "name": "アイサンテクノロジー(株)",
-          "pct": 21.6,
-          "relvol": 1.33
-        },
-        {
-          "ticker": "6273.T",
-          "name": "SMC",
-          "pct": 3.87,
-          "relvol": 1.97
+          "ticker": "6400.T",
+          "name": "不二精機(株)",
+          "pct": -0.36,
+          "relvol": 8.0
         },
         {
           "ticker": "6203.T",
           "name": "豊和工業(株)",
           "pct": 2.75,
           "relvol": 5.15
+        },
+        {
+          "ticker": "1783.T",
+          "name": "(株)ｆａｎｔａｓｉｓｔａ",
+          "pct": 1.41,
+          "relvol": 4.4
         }
       ]
     }
@@ -342,7 +342,7 @@
     "exit_price": 68.0,
     "exit_reason": "SL",
     "pnl": -1000.0,
-    "equity_after": 106800.0,
+    "equity_after": 102760.0,
     "reason": {
       "decision_time": "10:00",
       "day_open": 71.0,
@@ -355,69 +355,69 @@
       "gap_reason": "当日始動(9:00始値基準)。10:00の初回スキャンで条件成立。",
       "top3": [
         {
+          "ticker": "3625.T",
+          "name": "テックファームホールディングス(株)",
+          "pct": -1.08,
+          "relvol": 22.5
+        },
+        {
+          "ticker": "4427.T",
+          "name": "(株)ＥｄｕＬａｂ",
+          "pct": -0.44,
+          "relvol": 8.7
+        },
+        {
           "ticker": "1783.T",
           "name": "(株)ｆａｎｔａｓｉｓｔａ",
           "pct": -7.04,
           "relvol": 4.17
-        },
-        {
-          "ticker": "6203.T",
-          "name": "豊和工業(株)",
-          "pct": 4.76,
-          "relvol": 2.52
-        },
-        {
-          "ticker": "8354.T",
-          "name": "ふくおかFG",
-          "pct": 1.95,
-          "relvol": 2.45
         }
       ]
     }
   },
   {
     "date": "2026-09-11",
-    "ticker": "5301.T",
-    "name": "東海カーボン",
+    "ticker": "7042.T",
+    "name": "(株)アクセスグループ・ホールディングス",
     "dir": "LONG",
-    "entry_time": "10:04",
-    "entry": 2003.5,
-    "sl": 1987.0,
-    "tp": 2036.5,
+    "entry_time": "10:16",
+    "entry": 706.0,
+    "sl": 696.0,
+    "tp": 726.0,
     "shares": 100,
-    "exit_time": "10:34",
-    "exit_price": 1987.0,
-    "exit_reason": "SL",
-    "pnl": -1650.0,
-    "equity_after": 105150.0,
+    "exit_time": "10:46",
+    "exit_price": 726.0,
+    "exit_reason": "TP",
+    "pnl": 2000.0,
+    "equity_after": 104760.0,
     "reason": {
       "decision_time": "10:00",
-      "day_open": 1918.0,
-      "pct_move_at_decision": 4.04,
-      "range_high": 2003.0,
-      "range_low": 1946.5,
-      "breakout_time": "10:02",
-      "breakout_close": 2003.5,
-      "rel_volume": 1.34,
+      "day_open": 694.0,
+      "pct_move_at_decision": 1.01,
+      "range_high": 701.0,
+      "range_low": 696.0,
+      "breakout_time": "10:08",
+      "breakout_close": 707.0,
+      "rel_volume": 17.55,
       "gap_reason": "当日始動(9:00始値基準)。10:00の初回スキャンで条件成立。",
       "top3": [
-        {
-          "ticker": "6203.T",
-          "name": "豊和工業(株)",
-          "pct": 19.56,
-          "relvol": 3.75
-        },
-        {
-          "ticker": "4667.T",
-          "name": "アイサンテクノロジー(株)",
-          "pct": 9.31,
-          "relvol": 1.76
-        },
         {
           "ticker": "2459.T",
           "name": "アウンコンサルティング(株)",
           "pct": -9.18,
           "relvol": 269.8
+        },
+        {
+          "ticker": "6696.T",
+          "name": "(株)トラース・オン・プロダクト",
+          "pct": 2.68,
+          "relvol": 51.23
+        },
+        {
+          "ticker": "4599.T",
+          "name": "(株)ステムリム",
+          "pct": -9.18,
+          "relvol": 28.32
         }
       ]
     }
