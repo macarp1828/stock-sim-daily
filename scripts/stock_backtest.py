@@ -33,8 +33,7 @@ RAW_DIR = os.path.join(BASE_DIR, "stock_raw")
 OUT_DIR = BASE_DIR
 
 START_EQUITY = 100_000.0
-RISK_PCT = 0.01
-MAX_LEVERAGE = 3.3
+MAX_LEVERAGE = 3.3  # 1%リスクルールは撤廃済み(2026-09-13)。sizingは常にこの上限いっぱいを狙う。
 FIRST_SCAN_TIME = datetime.time(10, 0)
 SCAN_STEP = datetime.timedelta(minutes=30)      # re-rank candidates this often while idle
 ROLL_RANGE = datetime.timedelta(minutes=30)     # rolling lookback used as the breakout reference range
@@ -103,19 +102,17 @@ def relative_volume(df, d, decision_ts, lookback_days=5):
 
 
 def size_position(equity, entry_price, sl_price):
-    dist = abs(entry_price - sl_price)
-    if dist <= 0:
+    """1%リスクルールは撤廃(2026-09-13、ユーザー指示)。楽天証券の信用取引を前提に、
+    SL幅に関係なく毎回レバレッジ上限(3.3倍)いっぱいで建てる。これによりSL幅が狭い
+    トレードは小さい損失、SL幅が広いトレードは資産の数%規模の損失もあり得る
+    (リスクは資産%で一定ではなく、レバレッジ%を一定にする設計に変更)。"""
+    if entry_price <= 0:
         return 0
-    risk_jpy = equity * RISK_PCT
-    raw_shares = risk_jpy / dist
     max_shares_leverage = equity * MAX_LEVERAGE / entry_price
     leverage_lots = int(max_shares_leverage // 100) * 100
     if leverage_lots < 100:
         return 0
-    if raw_shares < 50:
-        return 0
-    risk_lots = max(int(round(raw_shares / 100)) * 100, 100)
-    return min(risk_lots, leverage_lots)
+    return leverage_lots
 
 
 def rank_candidates_at(data, d, scan_ts):
