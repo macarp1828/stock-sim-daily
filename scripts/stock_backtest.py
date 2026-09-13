@@ -34,6 +34,8 @@ OUT_DIR = BASE_DIR
 
 START_EQUITY = 100_000.0
 MAX_LEVERAGE = 3.3  # 1%リスクルールは撤廃済み(2026-09-13)。sizingは常にこの上限いっぱいを狙う。
+MAX_SL_PCT = 0.02  # SL幅の上限(価格に対する%)。全力レバレッジ下では sl_pct*MAX_LEVERAGE がその
+                    # トレードの資産%リスクになるため、幅の広すぎるセットアップは見送る。
 FIRST_SCAN_TIME = datetime.time(10, 0)
 SCAN_STEP = datetime.timedelta(minutes=30)      # re-rank candidates this often while idle
 ROLL_RANGE = datetime.timedelta(minutes=30)     # rolling lookback used as the breakout reference range
@@ -182,6 +184,16 @@ def try_enter(data, d, cand, scan_ts, equity, name_map):
     if direction == "LONG" and entry_price <= sl_price:
         return None, None
     if direction == "SHORT" and sl_price <= entry_price:
+        return None, None
+
+    # Since sizing is now always full 3.3x leverage (no risk-based throttling, per user
+    # instruction 2026-09-13), the SL distance itself directly sets the equity-% risk of
+    # the trade (risk% = sl_pct * MAX_LEVERAGE). A wide stop at full leverage produced two
+    # blow-up trades (18% and 26% of equity lost in one shot) in the unfiltered version --
+    # so candidates whose stop would be too wide at this leverage are skipped outright,
+    # trying the next-ranked candidate instead.
+    sl_pct = abs(entry_price - sl_price) / entry_price
+    if sl_pct > MAX_SL_PCT:
         return None, None
 
     shares = size_position(equity, entry_price, sl_price)
