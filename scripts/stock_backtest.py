@@ -1,12 +1,17 @@
 """
-株版「仮想敵」バックテスト v2。
-方針(ユーザー承認済み):
-- 銘柄プールは stock_universe.py + extra_candidates(2).py + theme_candidates.py(自動運転/先進技術テーマ)
-- 毎朝9:00-10:00の値動き(その時点までの情報のみ)でプール内をランキング
-- v2で追加: (a) その銘柄自身の分足EMA(9/20)によるトレンドフィルター(ブレイク方向とEMAトレンドが
-  一致する銘柄のみ対象、FXの15分足フィルターと同じ発想) (b) 直近5営業日の同時刻帯平均に対する
-  出来高倍率(相対出来高)を算出し、出来高急増(目安1.3倍以上)を優先
-- 9:00-10:00のレンジを60分以内にブレイクした方向にエントリー(次の足の始値で約定)
+株版「仮想敵」バックテスト v3(日中複数回売買・静観ロジック対応)。
+方針(ユーザー承認済み、2026-09-13合意):
+- 銘柄プールは stock_universe.py + extra_candidates(2).py + theme_candidates.py + growth_candidates.py
+- 同時保有は1ポジションのみ(FXと同じ規律)。ただし1日1トレードには限定せず、
+  ポジション決済後は条件が整い次第、同日中に何度でも再エントリーする。
+- 対象銘柄は日中で入れ替え可(静観中に他の銘柄が明確に強くなればそちらに乗り換える)。
+- 30分ごとに(idle時)候補を再ランキングする:
+  - トレンド: その銘柄自身の分足EMA9/EMA20が、当日の値動き方向と一致すること
+  - 出来高: 直近5営業日の同時刻帯平均に対する相対出来高(目安1.3倍以上を優先)
+  - 値動き: 始値からの騰落率(大きい順)
+  - トレンド不一致 or 出来高・値動きで基準を満たす銘柄が無ければ「静観」(その理由を記録し、
+    次のスキャンタイミングまで新規エントリーしない)
+- エントリー: 直近30分のレンジを30分以内にブレイクした方向に、次の足の始値で成行
 - SL=ブレイク直前の押し目/戻り安値高値、TP=SLまでの距離×2(FXと同じRR2)
 - 同日中に手仕舞い(信用デイトレのため)、未達なら大引け前の最終足で強制決済
 - 元手100,000円、1トレード最大損失=資産の1%(単元株の関係で0.5〜1.7%程度に変動)、レバレッジ上限3.3倍
@@ -30,20 +35,18 @@ OUT_DIR = BASE_DIR
 START_EQUITY = 100_000.0
 RISK_PCT = 0.01
 MAX_LEVERAGE = 3.3
-DECISION_TIME = datetime.time(10, 0)
-BREAKOUT_WINDOW = datetime.timedelta(minutes=60)  # only take a breakout that confirms soon after
-                                                    # the range forms -- otherwise "range width" as
-                                                    # the SL/TP basis is stale relative to where price
-                                                    # actually is, producing unreachable TP targets
+FIRST_SCAN_TIME = datetime.time(10, 0)
+SCAN_STEP = datetime.timedelta(minutes=30)      # re-rank candidates this often while idle
+ROLL_RANGE = datetime.timedelta(minutes=30)     # rolling lookback used as the breakout reference range
+BREAKOUT_WINDOW = datetime.timedelta(minutes=30)  # how long to wait for a breakout from a given scan point
 LAST_ENTRY_TIME = datetime.time(14, 30)
 FORCE_CLOSE_TIME = datetime.time(15, 25)
 START_DATE = datetime.date(2026, 9, 1)
-FINAL_DATE = datetime.date(2026, 9, 30)  # comparison period hard stop
-# END_DATE = "yesterday in JST" each time this runs, capped at FINAL_DATE, so a fresh run
-# always picks up the most recently completed trading day without manual editing.
+FINAL_DATE = datetime.date(2026, 9, 30)
 _now_jst = datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=9)))
 END_DATE = min((_now_jst - datetime.timedelta(days=1)).date(), FINAL_DATE)
-MAX_CANDIDATES_TRIED = 8  # try up to this many top movers per day before giving up
+MAX_CANDIDATES_TRIED = 8
+VOL_SURGE = 1.3
 
 
 def load_ticker(ticker):
@@ -75,8 +78,6 @@ def load_ticker(ticker):
 
 
 def relative_volume(df, d, decision_ts, lookback_days=5):
-    """cumulative volume from day-open to decision time, vs the average of the same
-    cumulative-by-time-of-day volume over the preceding `lookback_days` trading days."""
     day_df = df[df["date"] == d]
     up_to = day_df[day_df["ts_jst"] <= decision_ts]
     today_vol = up_to["volume"].sum()
@@ -101,12 +102,6 @@ def relative_volume(df, d, decision_ts, lookback_days=5):
 
 
 def size_position(equity, entry_price, sl_price):
-    """100-share (単元株) lots make strict flooring to the 1%-risk ideal size unworkable for
-    most mid/high-priced stocks on a 100,000-yen account (the ideal size is routinely <1 lot).
-    Leverage is a hard broker/margin limit so it is always floored down to a whole lot, never
-    rounded up past it. Risk is a soft target: round to the nearest lot, but only if the ideal
-    (uncapped) size is at least half a lot -- otherwise even 1 lot would blow risk far past 1%,
-    so skip the trade rather than force it."""
     dist = abs(entry_price - sl_price)
     if dist <= 0:
         return 0
@@ -120,6 +115,120 @@ def size_position(equity, entry_price, sl_price):
         return 0
     risk_lots = max(int(round(raw_shares / 100)) * 100, 100)
     return min(risk_lots, leverage_lots)
+
+
+def rank_candidates_at(data, d, scan_ts):
+    """Trend + volume qualified candidates as of scan_ts, ranked by volume-surge first
+    then |move since day open|. Returns list of dicts (possibly empty -> standby)."""
+    out = []
+    for ticker, df in data.items():
+        day_df = df[df["date"] == d]
+        if len(day_df) < 3:
+            continue
+        up_to = day_df[day_df["ts_jst"] <= scan_ts]
+        if len(up_to) < 3:
+            continue
+        day_open = day_df.iloc[0]["open"]
+        last_row = up_to.iloc[-1]
+        pct = (last_row["close"] - day_open) / day_open
+        trend_dir = "up" if last_row["ema9"] > last_row["ema20"] else ("down" if last_row["ema9"] < last_row["ema20"] else None)
+        want_dir = "up" if pct > 0 else "down"
+        if trend_dir != want_dir or abs(pct) < 1e-6:
+            continue
+        rel_vol = relative_volume(df, d, last_row["ts_jst"])
+        range_df = up_to[up_to["ts_jst"] > scan_ts - ROLL_RANGE]
+        if len(range_df) < 2:
+            continue
+        out.append({
+            "ticker": ticker, "pct": pct, "trend_dir": trend_dir, "rel_vol": rel_vol,
+            "range_high": range_df["high"].max(), "range_low": range_df["low"].min(),
+            "day_open": day_open, "scan_ts": last_row["ts_jst"],
+        })
+    out.sort(key=lambda c: (0 if (c["rel_vol"] is not None and c["rel_vol"] >= VOL_SURGE) else 1, -abs(c["pct"])))
+    return out
+
+
+def try_enter(data, d, cand, scan_ts, equity, name_map):
+    """Look for a rolling-range breakout for this candidate within BREAKOUT_WINDOW of scan_ts."""
+    ticker = cand["ticker"]
+    direction = "LONG" if cand["pct"] > 0 else "SHORT"
+    day_df = data[ticker]
+    day_df = day_df[day_df["date"] == d].reset_index(drop=True)
+    after = day_df[day_df["ts_jst"] > scan_ts].reset_index(drop=True)
+    window_end = scan_ts + BREAKOUT_WINDOW
+
+    entry_row, break_row = None, None
+    for i in range(len(after) - 1):
+        row = after.iloc[i]
+        if row["ts_jst"] > window_end or row["ts_jst"].time() >= LAST_ENTRY_TIME:
+            break
+        if direction == "LONG" and row["close"] > cand["range_high"]:
+            entry_row, break_row = after.iloc[i + 1], row
+            break
+        if direction == "SHORT" and row["close"] < cand["range_low"]:
+            entry_row, break_row = after.iloc[i + 1], row
+            break
+    if entry_row is None:
+        return None, None
+
+    entry_price = entry_row["open"]
+    pre_break = day_df[(day_df["ts_jst"] >= scan_ts) & (day_df["ts_jst"] <= break_row["ts_jst"])]
+    sl_price = pre_break["low"].min() if direction == "LONG" else pre_break["high"].max()
+    if direction == "LONG" and entry_price <= sl_price:
+        return None, None
+    if direction == "SHORT" and sl_price <= entry_price:
+        return None, None
+
+    shares = size_position(equity, entry_price, sl_price)
+    if shares < 100:
+        return None, None
+
+    dist = abs(entry_price - sl_price)
+    tp_price = entry_price + 2 * dist if direction == "LONG" else entry_price - 2 * dist
+
+    entry_idx = day_df[day_df["ts_jst"] == entry_row["ts_jst"]].index[0]
+    exit_price, exit_reason, exit_ts = None, None, None
+    for j in range(entry_idx, len(day_df)):
+        row = day_df.iloc[j]
+        if direction == "LONG":
+            if row["low"] <= sl_price:
+                exit_price, exit_reason = sl_price, "SL"
+            elif row["high"] >= tp_price:
+                exit_price, exit_reason = tp_price, "TP"
+        else:
+            if row["high"] >= sl_price:
+                exit_price, exit_reason = sl_price, "SL"
+            elif row["low"] <= tp_price:
+                exit_price, exit_reason = tp_price, "TP"
+        if exit_price is not None:
+            exit_ts = row["ts_jst"]
+            break
+        if row["ts_jst"].time() >= FORCE_CLOSE_TIME:
+            exit_price, exit_reason, exit_ts = row["close"], "大引け前手仕舞い", row["ts_jst"]
+            break
+    if exit_price is None:
+        last = day_df.iloc[-1]
+        exit_price, exit_reason, exit_ts = last["close"], "大引け前手仕舞い", last["ts_jst"]
+
+    pnl = ((exit_price - entry_price) if direction == "LONG" else (entry_price - exit_price)) * shares
+
+    trade = {
+        "date": d.isoformat(), "ticker": ticker, "name": name_map.get(ticker, ticker),
+        "dir": direction, "entry_time": entry_row["ts_jst"].strftime("%H:%M"),
+        "entry": round(float(entry_price), 1), "sl": round(float(sl_price), 1), "tp": round(float(tp_price), 1),
+        "shares": int(shares), "exit_time": exit_ts.strftime("%H:%M"), "exit_price": round(float(exit_price), 1),
+        "exit_reason": exit_reason, "pnl": round(float(pnl), 1),
+        "reason": {
+            "decision_time": cand["scan_ts"].strftime("%H:%M"),
+            "day_open": round(float(cand["day_open"]), 1),
+            "pct_move_at_decision": round(float(cand["pct"]) * 100, 2),
+            "range_high": round(float(cand["range_high"]), 1), "range_low": round(float(cand["range_low"]), 1),
+            "breakout_time": break_row["ts_jst"].strftime("%H:%M"),
+            "breakout_close": round(float(break_row["close"]), 1),
+            "rel_volume": round(float(cand["rel_vol"]), 2) if cand["rel_vol"] else None,
+        },
+    }
+    return trade, exit_ts
 
 
 def main():
@@ -136,131 +245,76 @@ def main():
     skipped_days = []
     d = START_DATE
     while d <= END_DATE:
-        candidates = []
-        for ticker, df in data.items():
-            day_df = df[df["date"] == d]
-            if len(day_df) < 3:
-                continue
-            up_to_decision = day_df[day_df["ts_jst"].dt.time <= DECISION_TIME]
-            if len(up_to_decision) < 3:
-                continue
-            day_open = day_df.iloc[0]["open"]
-            last_row = up_to_decision.iloc[-1]
-            last_close = last_row["close"]
-            pct = (last_close - day_open) / day_open
-            rng_high = up_to_decision["high"].max()
-            rng_low = up_to_decision["low"].min()
-            trend_dir = "up" if last_row["ema9"] > last_row["ema20"] else ("down" if last_row["ema9"] < last_row["ema20"] else None)
-            want_dir = "up" if pct > 0 else "down"
-            if trend_dir != want_dir:
-                continue  # skip: today's early move disagrees with this stock's own EMA9/20 trend
-            rel_vol = relative_volume(df, d, last_row["ts_jst"])
-            candidates.append((ticker, pct, rng_high, rng_low, day_open, last_row["ts_jst"], rel_vol))
+        day_trade_count = 0
+        prior_exit = None  # (ticker, exit_reason, exit_ts) of the previous trade today, for standby narration
+        scan_ts = None
+        any_scan_had_data = False
 
-        if not candidates:
-            skipped_days.append(d.isoformat())
+        # establish the first scan timestamp: the first bar at/after FIRST_SCAN_TIME
+        any_ticker_df = None
+        for df in data.values():
+            day_df = df[df["date"] == d]
+            if len(day_df):
+                any_ticker_df = day_df
+                break
+        if any_ticker_df is None:
             d += datetime.timedelta(days=1)
             continue
+        first_bars = any_ticker_df[any_ticker_df["ts_jst"].dt.time >= FIRST_SCAN_TIME]
+        if not len(first_bars):
+            d += datetime.timedelta(days=1)
+            continue
+        scan_ts = first_bars.iloc[0]["ts_jst"]
 
-        VOL_SURGE = 1.3
-        candidates.sort(key=lambda c: (0 if (c[6] is not None and c[6] >= VOL_SURGE) else 1, -abs(c[1])))
-        top3_for_log = [(t, name_map.get(t, t), round(float(p) * 100, 2), round(float(rv), 2) if rv else None)
-                         for t, p, *_, rv in candidates[:3]]
-
-        trade_made = False
-        for cand_i in range(min(MAX_CANDIDATES_TRIED, len(candidates))):
-            sel_ticker, sel_pct, rng_high, rng_low, day_open, decision_ts, sel_relvol = candidates[cand_i]
-            direction = "LONG" if sel_pct > 0 else "SHORT"
-
-            day_df = data[sel_ticker]
-            day_df = day_df[day_df["date"] == d].reset_index(drop=True)
-            after = day_df[day_df["ts_jst"] > decision_ts].reset_index(drop=True)
-
-            window_end = decision_ts + BREAKOUT_WINDOW
-            entry_row, break_row = None, None
-            for i in range(len(after) - 1):
-                row = after.iloc[i]
-                if row["ts_jst"] > window_end or row["ts_jst"].time() >= LAST_ENTRY_TIME:
-                    break
-                if direction == "LONG" and row["close"] > rng_high:
-                    entry_row, break_row = after.iloc[i + 1], row
-                    break
-                if direction == "SHORT" and row["close"] < rng_low:
-                    entry_row, break_row = after.iloc[i + 1], row
-                    break
-            if entry_row is None:
+        standby_notes = []
+        while scan_ts.time() < LAST_ENTRY_TIME:
+            candidates = rank_candidates_at(data, d, scan_ts)
+            if not candidates:
+                standby_notes.append(f"{scan_ts.strftime('%H:%M')}時点: トレンド一致銘柄なし、静観継続")
+                scan_ts = scan_ts + SCAN_STEP
                 continue
 
-            entry_price = entry_row["open"]
-            # SL from the swing right before the breakout (decision_ts -> break_row), not the
-            # original 9:00-10:00 range -- if the breakout confirms well after the range formed,
-            # the range's own low/high can already be far away and produce an unreachable 2R target.
-            pre_break = day_df[(day_df["ts_jst"] >= decision_ts) & (day_df["ts_jst"] <= break_row["ts_jst"])]
-            if direction == "LONG":
-                sl_price = pre_break["low"].min()
+            any_scan_had_data = True
+            top3 = [{"ticker": c["ticker"], "name": name_map.get(c["ticker"], c["ticker"]),
+                     "pct": round(float(c["pct"]) * 100, 2),
+                     "relvol": round(float(c["rel_vol"]), 2) if c["rel_vol"] else None} for c in candidates[:3]]
+
+            found = None
+            tried_tickers = []
+            for cand in candidates[:MAX_CANDIDATES_TRIED]:
+                tried_tickers.append(cand["ticker"])
+                trade, exit_ts = try_enter(data, d, cand, scan_ts, equity, name_map)
+                if trade is not None:
+                    found, found_exit_ts = trade, exit_ts
+                    break
+
+            if found is None:
+                standby_notes.append(
+                    f"{scan_ts.strftime('%H:%M')}時点: 候補{','.join(name_map.get(t,t) for t in tried_tickers[:3])}"
+                    f"を検討したがブレイク不成立/資金管理条件未達、静観継続"
+                )
+                scan_ts = scan_ts + SCAN_STEP
+                continue
+
+            # build the standby/gap narration for this trade
+            if prior_exit is not None:
+                gap_reason = (f"前トレード({prior_exit[0]})が{prior_exit[1]}で決済({prior_exit[2]})後、"
+                              f"{'; '.join(standby_notes) if standby_notes else '直後に新条件成立'}。"
+                              f"{found['ticker']}が新たにトレンド一致+出来高+ブレイク条件を満たしたため再エントリー。")
             else:
-                sl_price = pre_break["high"].max()
-            if direction == "LONG" and entry_price <= sl_price:
-                continue
-            if direction == "SHORT" and sl_price <= entry_price:
-                continue
+                gap_reason = (f"当日始動(9:00始値基準)。{'; '.join(standby_notes) if standby_notes else '10:00の初回スキャンで条件成立'}。")
+            found["reason"]["gap_reason"] = gap_reason
+            found["reason"]["top3"] = top3
+            standby_notes = []
 
-            shares = size_position(equity, entry_price, sl_price)
-            if shares < 100:
-                continue  # can't size this one within risk%/leverage rules even at 1 lot -- try next mover
+            equity += found["pnl"]
+            found["equity_after"] = round(float(equity), 1)
+            trades.append(found)
+            day_trade_count += 1
+            prior_exit = (found["ticker"], found["exit_reason"], found["exit_time"])
+            scan_ts = found_exit_ts
 
-            dist = abs(entry_price - sl_price)
-            tp_price = entry_price + 2 * dist if direction == "LONG" else entry_price - 2 * dist
-
-            entry_idx = day_df[day_df["ts_jst"] == entry_row["ts_jst"]].index[0]
-            exit_price, exit_reason, exit_ts = None, None, None
-            for j in range(entry_idx, len(day_df)):
-                row = day_df.iloc[j]
-                if direction == "LONG":
-                    if row["low"] <= sl_price:
-                        exit_price, exit_reason = sl_price, "SL"
-                    elif row["high"] >= tp_price:
-                        exit_price, exit_reason = tp_price, "TP"
-                else:
-                    if row["high"] >= sl_price:
-                        exit_price, exit_reason = sl_price, "SL"
-                    elif row["low"] <= tp_price:
-                        exit_price, exit_reason = tp_price, "TP"
-                if exit_price is not None:
-                    exit_ts = row["ts_jst"]
-                    break
-                if row["ts_jst"].time() >= FORCE_CLOSE_TIME:
-                    exit_price, exit_reason, exit_ts = row["close"], "大引け前手仕舞い", row["ts_jst"]
-                    break
-            if exit_price is None:
-                last = day_df.iloc[-1]
-                exit_price, exit_reason, exit_ts = last["close"], "大引け前手仕舞い", last["ts_jst"]
-
-            pnl = ((exit_price - entry_price) if direction == "LONG" else (entry_price - exit_price)) * shares
-            equity += pnl
-
-            trades.append({
-                "date": d.isoformat(), "ticker": sel_ticker, "name": name_map.get(sel_ticker, sel_ticker),
-                "dir": direction, "entry_time": entry_row["ts_jst"].strftime("%H:%M"),
-                "entry": round(float(entry_price), 1), "sl": round(float(sl_price), 1), "tp": round(float(tp_price), 1),
-                "shares": int(shares), "exit_time": exit_ts.strftime("%H:%M"), "exit_price": round(float(exit_price), 1),
-                "exit_reason": exit_reason, "pnl": round(float(pnl), 1), "equity_after": round(float(equity), 1),
-                "reason": {
-                    "decision_time": decision_ts.strftime("%H:%M"),
-                    "day_open": round(float(day_open), 1),
-                    "pct_move_at_decision": round(float(sel_pct) * 100, 2),
-                    "range_high": round(float(rng_high), 1), "range_low": round(float(rng_low), 1),
-                    "breakout_time": break_row["ts_jst"].strftime("%H:%M"),
-                    "breakout_close": round(float(break_row["close"]), 1),
-                    "rank_among_movers": cand_i + 1,
-                    "rel_volume": round(float(sel_relvol), 2) if sel_relvol else None,
-                    "top3": top3_for_log,
-                },
-            })
-            trade_made = True
-            break
-
-        if not trade_made:
+        if day_trade_count == 0:
             skipped_days.append(d.isoformat())
         d += datetime.timedelta(days=1)
 

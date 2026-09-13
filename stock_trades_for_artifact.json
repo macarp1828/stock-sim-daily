@@ -18,10 +18,12 @@
       "decision_time": "10:00",
       "day_open": 2456.5,
       "pct_move_at_decision": 2.16,
+      "range_high": 2517.0,
+      "range_low": 2491.5,
       "breakout_time": "10:24",
       "breakout_close": 2518.5,
-      "rank_among_movers": 5,
       "rel_volume": 1.99,
+      "gap_reason": "当日始動(9:00始値基準)。10:00の初回スキャンで条件成立。",
       "top3": [
         {
           "ticker": "4667.T",
@@ -63,10 +65,12 @@
       "decision_time": "10:00",
       "day_open": 1687.0,
       "pct_move_at_decision": -5.16,
+      "range_high": 1630.0,
+      "range_low": 1591.0,
       "breakout_time": "10:08",
       "breakout_close": 1590.0,
-      "rank_among_movers": 4,
       "rel_volume": 3.35,
+      "gap_reason": "当日始動(9:00始値基準)。10:00の初回スキャンで条件成立。",
       "top3": [
         {
           "ticker": "4976.T",
@@ -90,35 +94,78 @@
     }
   },
   {
-    "date": "2026-09-03",
-    "ticker": "6081.T",
-    "name": "アライドアーキテクツ(株)",
+    "date": "2026-09-02",
+    "ticker": "6762.T",
+    "name": "TDK",
     "dir": "SHORT",
-    "entry_time": "10:46",
-    "entry": 151.0,
-    "sl": 157.0,
-    "tp": 139.0,
-    "shares": 200,
-    "exit_time": "15:24",
-    "exit_price": 153.0,
-    "exit_reason": "大引け前手仕舞い",
-    "pnl": -400.0,
-    "equity_after": 104900.0,
+    "entry_time": "13:12",
+    "entry": 2854.5,
+    "sl": 2869.5,
+    "tp": 2824.5,
+    "shares": 100,
+    "exit_time": "13:34",
+    "exit_price": 2869.5,
+    "exit_reason": "SL",
+    "pnl": -1500.0,
+    "equity_after": 103800.0,
     "reason": {
-      "decision_time": "10:00",
-      "day_open": 163.0,
-      "pct_move_at_decision": -4.29,
-      "breakout_time": "10:44",
-      "breakout_close": 151.0,
-      "rank_among_movers": 2,
-      "rel_volume": 2.49,
+      "decision_time": "13:08",
+      "day_open": 2978.0,
+      "pct_move_at_decision": -3.78,
+      "range_high": 2895.0,
+      "range_low": 2865.0,
+      "breakout_time": "13:10",
+      "breakout_close": 2854.0,
+      "rel_volume": 2.18,
+      "gap_reason": "前トレード(9130.T)がTPで決済(13:08)後、直後に新条件成立。6762.Tが新たにトレンド一致+出来高+ブレイク条件を満たしたため再エントリー。",
       "top3": [
         {
           "ticker": "4976.T",
           "name": "東洋ドライルーブ(株)",
-          "pct": -5.33,
-          "relvol": 4.5
+          "pct": 9.76,
+          "relvol": 24.46
         },
+        {
+          "ticker": "9082.T",
+          "name": "大和自動車交通(株)",
+          "pct": -7.64,
+          "relvol": 25.67
+        },
+        {
+          "ticker": "9130.T",
+          "name": "共栄タンカー(株)",
+          "pct": -7.41,
+          "relvol": 2.71
+        }
+      ]
+    }
+  },
+  {
+    "date": "2026-09-03",
+    "ticker": "4381.T",
+    "name": "ビープラッツ(株)",
+    "dir": "SHORT",
+    "entry_time": "10:34",
+    "entry": 262.0,
+    "sl": 268.0,
+    "tp": 250.0,
+    "shares": 200,
+    "exit_time": "15:24",
+    "exit_price": 258.0,
+    "exit_reason": "大引け前手仕舞い",
+    "pnl": 800.0,
+    "equity_after": 104600.0,
+    "reason": {
+      "decision_time": "09:58",
+      "day_open": 275.0,
+      "pct_move_at_decision": -2.91,
+      "range_high": 269.0,
+      "range_low": 263.0,
+      "breakout_time": "10:30",
+      "breakout_close": 262.0,
+      "rel_volume": 1.5,
+      "gap_reason": "当日始動(9:00始値基準)。10:00の初回スキャンで条件成立。",
+      "top3": [
         {
           "ticker": "6081.T",
           "name": "アライドアーキテクツ(株)",
@@ -130,6 +177,12 @@
           "name": "(株)ミラタップ",
           "pct": 3.98,
           "relvol": 5.8
+        },
+        {
+          "ticker": "4381.T",
+          "name": "ビープラッツ(株)",
+          "pct": -2.91,
+          "relvol": 1.5
         }
       ]
     }
@@ -139,24 +192,26 @@
     "ticker": "3187.T",
     "name": "(株)ミラタップ",
     "dir": "LONG",
-    "entry_time": "10:46",
-    "entry": 388.0,
-    "sl": 378.0,
-    "tp": 408.0,
-    "shares": 100,
-    "exit_time": "13:10",
-    "exit_price": 378.0,
+    "entry_time": "10:20",
+    "entry": 383.0,
+    "sl": 380.0,
+    "tp": 389.0,
+    "shares": 300,
+    "exit_time": "10:22",
+    "exit_price": 380.0,
     "exit_reason": "SL",
-    "pnl": -1000.0,
-    "equity_after": 103900.0,
+    "pnl": -900.0,
+    "equity_after": 103700.0,
     "reason": {
       "decision_time": "09:56",
       "day_open": 362.0,
       "pct_move_at_decision": 4.97,
-      "breakout_time": "10:44",
-      "breakout_close": 388.0,
-      "rank_among_movers": 2,
+      "range_high": 382.0,
+      "range_low": 371.0,
+      "breakout_time": "10:10",
+      "breakout_close": 384.0,
       "rel_volume": 3.03,
+      "gap_reason": "当日始動(9:00始値基準)。10:00の初回スキャンで条件成立。",
       "top3": [
         {
           "ticker": "2764.T",
@@ -180,6 +235,241 @@
     }
   },
   {
+    "date": "2026-09-04",
+    "ticker": "3187.T",
+    "name": "(株)ミラタップ",
+    "dir": "LONG",
+    "entry_time": "10:46",
+    "entry": 388.0,
+    "sl": 378.0,
+    "tp": 408.0,
+    "shares": 100,
+    "exit_time": "13:10",
+    "exit_price": 378.0,
+    "exit_reason": "SL",
+    "pnl": -1000.0,
+    "equity_after": 102700.0,
+    "reason": {
+      "decision_time": "10:22",
+      "day_open": 362.0,
+      "pct_move_at_decision": 5.52,
+      "range_high": 384.0,
+      "range_low": 376.0,
+      "breakout_time": "10:44",
+      "breakout_close": 388.0,
+      "rel_volume": 3.23,
+      "gap_reason": "前トレード(3187.T)がSLで決済(10:22)後、直後に新条件成立。3187.Tが新たにトレンド一致+出来高+ブレイク条件を満たしたため再エントリー。",
+      "top3": [
+        {
+          "ticker": "3187.T",
+          "name": "(株)ミラタップ",
+          "pct": 5.52,
+          "relvol": 3.23
+        },
+        {
+          "ticker": "2764.T",
+          "name": "(株)ひらまつ",
+          "pct": 4.38,
+          "relvol": 1.41
+        },
+        {
+          "ticker": "8058.T",
+          "name": "三菱商事",
+          "pct": -3.2,
+          "relvol": 2.74
+        }
+      ]
+    }
+  },
+  {
+    "date": "2026-09-04",
+    "ticker": "9107.T",
+    "name": "川崎汽船",
+    "dir": "SHORT",
+    "entry_time": "13:44",
+    "entry": 3311.0,
+    "sl": 3320.0,
+    "tp": 3293.0,
+    "shares": 100,
+    "exit_time": "14:00",
+    "exit_price": 3320.0,
+    "exit_reason": "SL",
+    "pnl": -900.0,
+    "equity_after": 101800.0,
+    "reason": {
+      "decision_time": "13:40",
+      "day_open": 3375.0,
+      "pct_move_at_decision": -1.66,
+      "range_high": 3345.0,
+      "range_low": 3318.0,
+      "breakout_time": "13:42",
+      "breakout_close": 3311.0,
+      "rel_volume": 1.45,
+      "gap_reason": "前トレード(3187.T)がSLで決済(13:10)後、13:10時点: 候補(株)ミラタップ,ソフトバンクグループ,(株)やまみを検討したがブレイク不成立/資金管理条件未達、静観継続。9107.Tが新たにトレンド一致+出来高+ブレイク条件を満たしたため再エントリー。",
+      "top3": [
+        {
+          "ticker": "2820.T",
+          "name": "(株)やまみ",
+          "pct": 3.62,
+          "relvol": 1.93
+        },
+        {
+          "ticker": "6963.T",
+          "name": "ローム",
+          "pct": 2.39,
+          "relvol": 1.31
+        },
+        {
+          "ticker": "9983.T",
+          "name": "ファーストリテイリング",
+          "pct": 2.31,
+          "relvol": 1.47
+        }
+      ]
+    }
+  },
+  {
+    "date": "2026-09-07",
+    "ticker": "5301.T",
+    "name": "東海カーボン",
+    "dir": "LONG",
+    "entry_time": "10:36",
+    "entry": 1915.5,
+    "sl": 1910.5,
+    "tp": 1925.5,
+    "shares": 100,
+    "exit_time": "10:38",
+    "exit_price": 1910.5,
+    "exit_reason": "SL",
+    "pnl": -500.0,
+    "equity_after": 101300.0,
+    "reason": {
+      "decision_time": "10:30",
+      "day_open": 1859.5,
+      "pct_move_at_decision": 2.9,
+      "range_high": 1915.0,
+      "range_low": 1883.5,
+      "breakout_time": "10:34",
+      "breakout_close": 1916.0,
+      "rel_volume": 1.37,
+      "gap_reason": "当日始動(9:00始値基準)。10:00時点: 候補(株)石井表記,マーチャント・バンカーズ(株),レーザーテックを検討したがブレイク不成立/資金管理条件未達、静観継続。",
+      "top3": [
+        {
+          "ticker": "3121.T",
+          "name": "マーチャント・バンカーズ(株)",
+          "pct": -5.58,
+          "relvol": 2.64
+        },
+        {
+          "ticker": "6920.T",
+          "name": "レーザーテック",
+          "pct": 4.59,
+          "relvol": 1.74
+        },
+        {
+          "ticker": "6336.T",
+          "name": "(株)石井表記",
+          "pct": 3.74,
+          "relvol": 3.18
+        }
+      ]
+    }
+  },
+  {
+    "date": "2026-09-07",
+    "ticker": "1783.T",
+    "name": "(株)ｆａｎｔａｓｉｓｔａ",
+    "dir": "LONG",
+    "entry_time": "13:02",
+    "entry": 53.0,
+    "sl": 52.0,
+    "tp": 55.0,
+    "shares": 1000,
+    "exit_time": "13:02",
+    "exit_price": 52.0,
+    "exit_reason": "SL",
+    "pnl": -1000.0,
+    "equity_after": 100300.0,
+    "reason": {
+      "decision_time": "12:38",
+      "day_open": 51.0,
+      "pct_move_at_decision": 1.96,
+      "range_high": 53.0,
+      "range_low": 52.0,
+      "breakout_time": "13:00",
+      "breakout_close": 54.0,
+      "rel_volume": 3.73,
+      "gap_reason": "前トレード(5301.T)がSLで決済(10:38)後、10:38時点: 候補レーザーテック,マーチャント・バンカーズ(株),(株)石井表記を検討したがブレイク不成立/資金管理条件未達、静観継続; 11:08時点: 候補豊和工業(株),レーザーテック,ソフトバンクグループを検討したがブレイク不成立/資金管理条件未達、静観継続; 11:38時点: 候補豊和工業(株),レーザーテック,ロームを検討したがブレイク不成立/資金管理条件未達、静観継続; 12:08時点: トレンド一致銘柄なし、静観継続。1783.Tが新たにトレンド一致+出来高+ブレイク条件を満たしたため再エントリー。",
+      "top3": [
+        {
+          "ticker": "6203.T",
+          "name": "豊和工業(株)",
+          "pct": 23.26,
+          "relvol": 18.45
+        },
+        {
+          "ticker": "9984.T",
+          "name": "ソフトバンクグループ",
+          "pct": 4.26,
+          "relvol": 2.12
+        },
+        {
+          "ticker": "6752.T",
+          "name": "パナソニックHD",
+          "pct": 3.61,
+          "relvol": 1.5
+        }
+      ]
+    }
+  },
+  {
+    "date": "2026-09-07",
+    "ticker": "1783.T",
+    "name": "(株)ｆａｎｔａｓｉｓｔａ",
+    "dir": "LONG",
+    "entry_time": "13:06",
+    "entry": 55.0,
+    "sl": 52.0,
+    "tp": 61.0,
+    "shares": 300,
+    "exit_time": "15:24",
+    "exit_price": 56.0,
+    "exit_reason": "大引け前手仕舞い",
+    "pnl": 300.0,
+    "equity_after": 100600.0,
+    "reason": {
+      "decision_time": "13:02",
+      "day_open": 51.0,
+      "pct_move_at_decision": 3.92,
+      "range_high": 54.0,
+      "range_low": 52.0,
+      "breakout_time": "13:04",
+      "breakout_close": 55.0,
+      "rel_volume": 7.07,
+      "gap_reason": "前トレード(1783.T)がSLで決済(13:02)後、直後に新条件成立。1783.Tが新たにトレンド一致+出来高+ブレイク条件を満たしたため再エントリー。",
+      "top3": [
+        {
+          "ticker": "6203.T",
+          "name": "豊和工業(株)",
+          "pct": 21.68,
+          "relvol": 24.63
+        },
+        {
+          "ticker": "4976.T",
+          "name": "東洋ドライルーブ(株)",
+          "pct": 10.6,
+          "relvol": 1.5
+        },
+        {
+          "ticker": "9984.T",
+          "name": "ソフトバンクグループ",
+          "pct": 4.78,
+          "relvol": 2.11
+        }
+      ]
+    }
+  },
+  {
     "date": "2026-09-08",
     "ticker": "7276.T",
     "name": "小糸製作所",
@@ -193,15 +483,17 @@
     "exit_price": 2620.5,
     "exit_reason": "TP",
     "pnl": 2600.0,
-    "equity_after": 106500.0,
+    "equity_after": 103200.0,
     "reason": {
       "decision_time": "10:00",
       "day_open": 2712.5,
       "pct_move_at_decision": -2.03,
+      "range_high": 2666.0,
+      "range_low": 2648.0,
       "breakout_time": "10:20",
       "breakout_close": 2647.0,
-      "rank_among_movers": 4,
       "rel_volume": 1.47,
+      "gap_reason": "当日始動(9:00始値基準)。10:00の初回スキャンで条件成立。",
       "top3": [
         {
           "ticker": "9984.T",
@@ -225,6 +517,147 @@
     }
   },
   {
+    "date": "2026-09-08",
+    "ticker": "7267.T",
+    "name": "本田技研工業",
+    "dir": "SHORT",
+    "entry_time": "12:38",
+    "entry": 1615.0,
+    "sl": 1617.5,
+    "tp": 1610.0,
+    "shares": 200,
+    "exit_time": "12:46",
+    "exit_price": 1610.0,
+    "exit_reason": "TP",
+    "pnl": 1000.0,
+    "equity_after": 104200.0,
+    "reason": {
+      "decision_time": "12:34",
+      "day_open": 1656.0,
+      "pct_move_at_decision": -2.36,
+      "range_high": 1622.5,
+      "range_low": 1615.5,
+      "breakout_time": "12:36",
+      "breakout_close": 1615.0,
+      "rel_volume": 1.51,
+      "gap_reason": "前トレード(7276.T)がTPで決済(12:34)後、直後に新条件成立。7267.Tが新たにトレンド一致+出来高+ブレイク条件を満たしたため再エントリー。",
+      "top3": [
+        {
+          "ticker": "9984.T",
+          "name": "ソフトバンクグループ",
+          "pct": 7.53,
+          "relvol": 2.14
+        },
+        {
+          "ticker": "6203.T",
+          "name": "豊和工業(株)",
+          "pct": 6.33,
+          "relvol": 10.97
+        },
+        {
+          "ticker": "1783.T",
+          "name": "(株)ｆａｎｔａｓｉｓｔａ",
+          "pct": 3.28,
+          "relvol": 25.28
+        }
+      ]
+    }
+  },
+  {
+    "date": "2026-09-08",
+    "ticker": "7276.T",
+    "name": "小糸製作所",
+    "dir": "SHORT",
+    "entry_time": "12:56",
+    "entry": 2608.5,
+    "sl": 2613.5,
+    "tp": 2598.5,
+    "shares": 100,
+    "exit_time": "13:44",
+    "exit_price": 2598.5,
+    "exit_reason": "TP",
+    "pnl": 1000.0,
+    "equity_after": 105200.0,
+    "reason": {
+      "decision_time": "12:46",
+      "day_open": 2712.5,
+      "pct_move_at_decision": -3.74,
+      "range_high": 2636.5,
+      "range_low": 2610.5,
+      "breakout_time": "12:54",
+      "breakout_close": 2609.0,
+      "rel_volume": 1.3,
+      "gap_reason": "前トレード(7267.T)がTPで決済(12:46)後、直後に新条件成立。7276.Tが新たにトレンド一致+出来高+ブレイク条件を満たしたため再エントリー。",
+      "top3": [
+        {
+          "ticker": "6203.T",
+          "name": "豊和工業(株)",
+          "pct": 8.4,
+          "relvol": 9.77
+        },
+        {
+          "ticker": "9984.T",
+          "name": "ソフトバンクグループ",
+          "pct": 6.36,
+          "relvol": 2.14
+        },
+        {
+          "ticker": "7276.T",
+          "name": "小糸製作所",
+          "pct": -3.74,
+          "relvol": 1.3
+        }
+      ]
+    }
+  },
+  {
+    "date": "2026-09-08",
+    "ticker": "1783.T",
+    "name": "(株)ｆａｎｔａｓｉｓｔａ",
+    "dir": "LONG",
+    "entry_time": "14:02",
+    "entry": 67.0,
+    "sl": 65.0,
+    "tp": 71.0,
+    "shares": 500,
+    "exit_time": "14:28",
+    "exit_price": 65.0,
+    "exit_reason": "SL",
+    "pnl": -1000.0,
+    "equity_after": 104200.0,
+    "reason": {
+      "decision_time": "13:44",
+      "day_open": 61.0,
+      "pct_move_at_decision": 8.2,
+      "range_high": 66.0,
+      "range_low": 64.0,
+      "breakout_time": "14:00",
+      "breakout_close": 67.0,
+      "rel_volume": 15.38,
+      "gap_reason": "前トレード(7276.T)がTPで決済(13:44)後、直後に新条件成立。1783.Tが新たにトレンド一致+出来高+ブレイク条件を満たしたため再エントリー。",
+      "top3": [
+        {
+          "ticker": "1783.T",
+          "name": "(株)ｆａｎｔａｓｉｓｔａ",
+          "pct": 8.2,
+          "relvol": 15.38
+        },
+        {
+          "ticker": "9984.T",
+          "name": "ソフトバンクグループ",
+          "pct": 7.58,
+          "relvol": 2.1
+        },
+        {
+          "ticker": "7276.T",
+          "name": "小糸製作所",
+          "pct": -4.2,
+          "relvol": 1.36
+        }
+      ]
+    }
+  },
+  {
     "date": "2026-09-09",
     "ticker": "2432.T",
     "name": "DeNA",
@@ -238,15 +671,17 @@
     "exit_price": 2532.0,
     "exit_reason": "TP",
     "pnl": 800.0,
-    "equity_after": 107300.0,
+    "equity_after": 105000.0,
     "reason": {
       "decision_time": "10:00",
       "day_open": 2610.5,
       "pct_move_at_decision": -2.7,
+      "range_high": 2574.0,
+      "range_low": 2540.0,
       "breakout_time": "10:02",
       "breakout_close": 2539.5,
-      "rank_among_movers": 5,
       "rel_volume": 1.38,
+      "gap_reason": "当日始動(9:00始値基準)。10:00の初回スキャンで条件成立。",
       "top3": [
         {
           "ticker": "4667.T",
@@ -261,10 +696,245 @@
           "relvol": 1.97
         },
         {
-          "ticker": "6696.T",
-          "name": "(株)トラース・オン・プロダクト",
-          "pct": -3.4,
-          "relvol": 2.43
+          "ticker": "6203.T",
+          "name": "豊和工業(株)",
+          "pct": 2.75,
+          "relvol": 5.15
+        }
+      ]
+    }
+  },
+  {
+    "date": "2026-09-09",
+    "ticker": "5301.T",
+    "name": "東海カーボン",
+    "dir": "LONG",
+    "entry_time": "11:04",
+    "entry": 1943.0,
+    "sl": 1931.5,
+    "tp": 1966.0,
+    "shares": 100,
+    "exit_time": "11:22",
+    "exit_price": 1966.0,
+    "exit_reason": "TP",
+    "pnl": 2300.0,
+    "equity_after": 107300.0,
+    "reason": {
+      "decision_time": "10:58",
+      "day_open": 1875.0,
+      "pct_move_at_decision": 3.09,
+      "range_high": 1936.0,
+      "range_low": 1919.5,
+      "breakout_time": "11:02",
+      "breakout_close": 1942.5,
+      "rel_volume": 2.82,
+      "gap_reason": "前トレード(2432.T)がTPで決済(10:28)後、10:28時点: 候補アイサンテクノロジー(株),トミタ電機(株),SMCを検討したがブレイク不成立/資金管理条件未達、静観継続。5301.Tが新たにトレンド一致+出来高+ブレイク条件を満たしたため再エントリー。",
+      "top3": [
+        {
+          "ticker": "6898.T",
+          "name": "トミタ電機(株)",
+          "pct": -12.3,
+          "relvol": 2.85
+        },
+        {
+          "ticker": "5301.T",
+          "name": "東海カーボン",
+          "pct": 3.09,
+          "relvol": 2.82
+        },
+        {
+          "ticker": "6920.T",
+          "name": "レーザーテック",
+          "pct": -2.75,
+          "relvol": 2.67
+        }
+      ]
+    }
+  },
+  {
+    "date": "2026-09-09",
+    "ticker": "5301.T",
+    "name": "東海カーボン",
+    "dir": "LONG",
+    "entry_time": "11:30",
+    "entry": 1968.0,
+    "sl": 1957.5,
+    "tp": 1989.0,
+    "shares": 100,
+    "exit_time": "12:54",
+    "exit_price": 1957.5,
+    "exit_reason": "SL",
+    "pnl": -1050.0,
+    "equity_after": 106250.0,
+    "reason": {
+      "decision_time": "11:22",
+      "day_open": 1875.0,
+      "pct_move_at_decision": 4.75,
+      "range_high": 1968.0,
+      "range_low": 1930.5,
+      "breakout_time": "11:28",
+      "breakout_close": 1968.5,
+      "rel_volume": 3.25,
+      "gap_reason": "前トレード(5301.T)がTPで決済(11:22)後、直後に新条件成立。5301.Tが新たにトレンド一致+出来高+ブレイク条件を満たしたため再エントリー。",
+      "top3": [
+        {
+          "ticker": "6898.T",
+          "name": "トミタ電機(株)",
+          "pct": -8.36,
+          "relvol": 2.94
+        },
+        {
+          "ticker": "6203.T",
+          "name": "豊和工業(株)",
+          "pct": 7.7,
+          "relvol": 3.55
+        },
+        {
+          "ticker": "5301.T",
+          "name": "東海カーボン",
+          "pct": 4.75,
+          "relvol": 3.25
+        }
+      ]
+    }
+  },
+  {
+    "date": "2026-09-09",
+    "ticker": "5019.T",
+    "name": "出光興産",
+    "dir": "LONG",
+    "entry_time": "13:08",
+    "entry": 1656.0,
+    "sl": 1647.0,
+    "tp": 1674.0,
+    "shares": 100,
+    "exit_time": "13:24",
+    "exit_price": 1647.0,
+    "exit_reason": "SL",
+    "pnl": -900.0,
+    "equity_after": 105350.0,
+    "reason": {
+      "decision_time": "12:54",
+      "day_open": 1622.5,
+      "pct_move_at_decision": 1.79,
+      "range_high": 1655.0,
+      "range_low": 1631.5,
+      "breakout_time": "13:06",
+      "breakout_close": 1656.5,
+      "rel_volume": 1.71,
+      "gap_reason": "前トレード(5301.T)がSLで決済(12:54)後、直後に新条件成立。5019.Tが新たにトレンド一致+出来高+ブレイク条件を満たしたため再エントリー。",
+      "top3": [
+        {
+          "ticker": "6920.T",
+          "name": "レーザーテック",
+          "pct": -4.62,
+          "relvol": 2.37
+        },
+        {
+          "ticker": "5301.T",
+          "name": "東海カーボン",
+          "pct": 4.4,
+          "relvol": 3.37
+        },
+        {
+          "ticker": "2929.T",
+          "name": "(株)ファーマフーズ",
+          "pct": 3.53,
+          "relvol": 6.37
+        }
+      ]
+    }
+  },
+  {
+    "date": "2026-09-09",
+    "ticker": "6753.T",
+    "name": "シャープ",
+    "dir": "LONG",
+    "entry_time": "13:28",
+    "entry": 628.9,
+    "sl": 628.0,
+    "tp": 630.7,
+    "shares": 500,
+    "exit_time": "13:30",
+    "exit_price": 628.0,
+    "exit_reason": "SL",
+    "pnl": -450.0,
+    "equity_after": 104900.0,
+    "reason": {
+      "decision_time": "13:24",
+      "day_open": 625.5,
+      "pct_move_at_decision": 0.46,
+      "range_high": 628.6,
+      "range_low": 625.4,
+      "breakout_time": "13:26",
+      "breakout_close": 628.9,
+      "rel_volume": 1.39,
+      "gap_reason": "前トレード(5019.T)がSLで決済(13:24)後、直後に新条件成立。6753.Tが新たにトレンド一致+出来高+ブレイク条件を満たしたため再エントリー。",
+      "top3": [
+        {
+          "ticker": "6920.T",
+          "name": "レーザーテック",
+          "pct": -5.41,
+          "relvol": 2.27
+        },
+        {
+          "ticker": "5019.T",
+          "name": "出光興産",
+          "pct": 1.6,
+          "relvol": 1.75
+        },
+        {
+          "ticker": "9022.T",
+          "name": "JR東海",
+          "pct": 1.0,
+          "relvol": 1.42
+        }
+      ]
+    }
+  },
+  {
+    "date": "2026-09-09",
+    "ticker": "5301.T",
+    "name": "東海カーボン",
+    "dir": "LONG",
+    "entry_time": "13:38",
+    "entry": 1968.5,
+    "sl": 1959.5,
+    "tp": 1986.5,
+    "shares": 100,
+    "exit_time": "15:24",
+    "exit_price": 1977.5,
+    "exit_reason": "大引け前手仕舞い",
+    "pnl": 900.0,
+    "equity_after": 105800.0,
+    "reason": {
+      "decision_time": "13:30",
+      "day_open": 1875.0,
+      "pct_move_at_decision": 4.91,
+      "range_high": 1967.5,
+      "range_low": 1942.0,
+      "breakout_time": "13:36",
+      "breakout_close": 1968.5,
+      "rel_volume": 3.43,
+      "gap_reason": "前トレード(6753.T)がSLで決済(13:30)後、直後に新条件成立。5301.Tが新たにトレンド一致+出来高+ブレイク条件を満たしたため再エントリー。",
+      "top3": [
+        {
+          "ticker": "6898.T",
+          "name": "トミタ電機(株)",
+          "pct": -10.09,
+          "relvol": 3.6
+        },
+        {
+          "ticker": "6920.T",
+          "name": "レーザーテック",
+          "pct": -5.26,
+          "relvol": 2.26
+        },
+        {
+          "ticker": "5301.T",
+          "name": "東海カーボン",
+          "pct": 4.91,
+          "relvol": 3.43
         }
       ]
     }
@@ -274,24 +944,26 @@
     "ticker": "1783.T",
     "name": "(株)ｆａｎｔａｓｉｓｔａ",
     "dir": "SHORT",
-    "entry_time": "10:30",
-    "entry": 62.0,
+    "entry_time": "10:20",
+    "entry": 63.0,
     "sl": 68.0,
-    "tp": 50.0,
+    "tp": 53.0,
     "shares": 200,
     "exit_time": "11:24",
     "exit_price": 68.0,
     "exit_reason": "SL",
-    "pnl": -1200.0,
-    "equity_after": 106100.0,
+    "pnl": -1000.0,
+    "equity_after": 104800.0,
     "reason": {
       "decision_time": "10:00",
       "day_open": 71.0,
       "pct_move_at_decision": -7.04,
-      "breakout_time": "10:28",
-      "breakout_close": 62.0,
-      "rank_among_movers": 1,
+      "range_high": 68.0,
+      "range_low": 64.0,
+      "breakout_time": "10:18",
+      "breakout_close": 63.0,
       "rel_volume": 4.17,
+      "gap_reason": "当日始動(9:00始値基準)。10:00の初回スキャンで条件成立。",
       "top3": [
         {
           "ticker": "1783.T",
@@ -306,37 +978,133 @@
           "relvol": 2.52
         },
         {
-          "ticker": "5533.T",
-          "name": "(株)エリッツホールディングス",
-          "pct": 2.32,
-          "relvol": 3.67
+          "ticker": "8354.T",
+          "name": "ふくおかFG",
+          "pct": 1.95,
+          "relvol": 2.45
+        }
+      ]
+    }
+  },
+  {
+    "date": "2026-09-10",
+    "ticker": "6753.T",
+    "name": "シャープ",
+    "dir": "LONG",
+    "entry_time": "13:28",
+    "entry": 666.2,
+    "sl": 665.1,
+    "tp": 668.4,
+    "shares": 500,
+    "exit_time": "13:40",
+    "exit_price": 668.4,
+    "exit_reason": "TP",
+    "pnl": 1100.0,
+    "equity_after": 105900.0,
+    "reason": {
+      "decision_time": "13:24",
+      "day_open": 634.4,
+      "pct_move_at_decision": 4.97,
+      "range_high": 666.1,
+      "range_low": 663.1,
+      "breakout_time": "13:26",
+      "breakout_close": 666.2,
+      "rel_volume": 2.06,
+      "gap_reason": "前トレード(1783.T)がSLで決済(11:24)後、11:24時点: 候補豊和工業(株),ＧＭＯプライム・ストラテジー(株),(株)トラース・オン・プロダクトを検討したがブレイク不成立/資金管理条件未達、静観継続; 11:54時点: 候補住友大阪セメント,シャープ,パナソニックHDを検討したがブレイク不成立/資金管理条件未達、静観継続; 12:24時点: トレンド一致銘柄なし、静観継続; 12:54時点: 候補シャープ,(株)トラース・オン・プロダクト,三井金属を検討したがブレイク不成立/資金管理条件未達、静観継続。6753.Tが新たにトレンド一致+出来高+ブレイク条件を満たしたため再エントリー。",
+      "top3": [
+        {
+          "ticker": "6696.T",
+          "name": "(株)トラース・オン・プロダクト",
+          "pct": -6.01,
+          "relvol": 5.42
+        },
+        {
+          "ticker": "6753.T",
+          "name": "シャープ",
+          "pct": 4.97,
+          "relvol": 2.06
+        },
+        {
+          "ticker": "6203.T",
+          "name": "豊和工業(株)",
+          "pct": 2.97,
+          "relvol": 1.92
+        }
+      ]
+    }
+  },
+  {
+    "date": "2026-09-10",
+    "ticker": "4446.T",
+    "name": "Ｌｉｎｋ－Ｕグループ(株)",
+    "dir": "LONG",
+    "entry_time": "13:48",
+    "entry": 859.0,
+    "sl": 853.0,
+    "tp": 871.0,
+    "shares": 200,
+    "exit_time": "15:22",
+    "exit_price": 857.0,
+    "exit_reason": "大引け前手仕舞い",
+    "pnl": -400.0,
+    "equity_after": 105500.0,
+    "reason": {
+      "decision_time": "13:38",
+      "day_open": 833.0,
+      "pct_move_at_decision": 2.52,
+      "range_high": 854.0,
+      "range_low": 844.0,
+      "breakout_time": "13:46",
+      "breakout_close": 859.0,
+      "rel_volume": 2.01,
+      "gap_reason": "前トレード(6753.T)がTPで決済(13:40)後、直後に新条件成立。4446.Tが新たにトレンド一致+出来高+ブレイク条件を満たしたため再エントリー。",
+      "top3": [
+        {
+          "ticker": "6753.T",
+          "name": "シャープ",
+          "pct": 5.38,
+          "relvol": 2.09
+        },
+        {
+          "ticker": "6203.T",
+          "name": "豊和工業(株)",
+          "pct": 4.24,
+          "relvol": 1.99
+        },
+        {
+          "ticker": "6696.T",
+          "name": "(株)トラース・オン・プロダクト",
+          "pct": -3.48,
+          "relvol": 5.5
         }
       ]
     }
   },
   {
     "date": "2026-09-11",
-    "ticker": "4599.T",
-    "name": "(株)ステムリム",
-    "dir": "SHORT",
-    "entry_time": "10:52",
-    "entry": 187.0,
-    "sl": 194.0,
-    "tp": 173.0,
-    "shares": 200,
-    "exit_time": "15:30",
-    "exit_price": 180.0,
-    "exit_reason": "大引け前手仕舞い",
-    "pnl": 1400.0,
-    "equity_after": 107500.0,
+    "ticker": "5301.T",
+    "name": "東海カーボン",
+    "dir": "LONG",
+    "entry_time": "10:04",
+    "entry": 2003.5,
+    "sl": 1987.0,
+    "tp": 2036.5,
+    "shares": 100,
+    "exit_time": "10:34",
+    "exit_price": 1987.0,
+    "exit_reason": "SL",
+    "pnl": -1650.0,
+    "equity_after": 103850.0,
     "reason": {
       "decision_time": "10:00",
-      "day_open": 207.0,
-      "pct_move_at_decision": -9.18,
-      "breakout_time": "10:50",
-      "breakout_close": 187.0,
-      "rank_among_movers": 4,
-      "rel_volume": 28.32,
+      "day_open": 1918.0,
+      "pct_move_at_decision": 4.04,
+      "range_high": 2003.0,
+      "range_low": 1946.5,
+      "breakout_time": "10:02",
+      "breakout_close": 2003.5,
+      "rel_volume": 1.34,
+      "gap_reason": "当日始動(9:00始値基準)。10:00の初回スキャンで条件成立。",
       "top3": [
         {
           "ticker": "6203.T",
@@ -355,6 +1123,288 @@
           "name": "アウンコンサルティング(株)",
           "pct": -9.18,
           "relvol": 269.8
+        }
+      ]
+    }
+  },
+  {
+    "date": "2026-09-11",
+    "ticker": "2459.T",
+    "name": "アウンコンサルティング(株)",
+    "dir": "SHORT",
+    "entry_time": "10:46",
+    "entry": 175.0,
+    "sl": 177.0,
+    "tp": 171.0,
+    "shares": 500,
+    "exit_time": "10:50",
+    "exit_price": 177.0,
+    "exit_reason": "SL",
+    "pnl": -1000.0,
+    "equity_after": 102850.0,
+    "reason": {
+      "decision_time": "10:34",
+      "day_open": 196.0,
+      "pct_move_at_decision": -10.2,
+      "range_high": 178.0,
+      "range_low": 176.0,
+      "breakout_time": "10:40",
+      "breakout_close": 175.0,
+      "rel_volume": 186.68,
+      "gap_reason": "前トレード(5301.T)がSLで決済(10:34)後、直後に新条件成立。2459.Tが新たにトレンド一致+出来高+ブレイク条件を満たしたため再エントリー。",
+      "top3": [
+        {
+          "ticker": "6203.T",
+          "name": "豊和工業(株)",
+          "pct": 23.87,
+          "relvol": 3.55
+        },
+        {
+          "ticker": "6208.T",
+          "name": "(株)石川製作所",
+          "pct": 11.93,
+          "relvol": 22.1
+        },
+        {
+          "ticker": "4667.T",
+          "name": "アイサンテクノロジー(株)",
+          "pct": 10.66,
+          "relvol": 1.96
+        }
+      ]
+    }
+  },
+  {
+    "date": "2026-09-11",
+    "ticker": "4599.T",
+    "name": "(株)ステムリム",
+    "dir": "SHORT",
+    "entry_time": "11:00",
+    "entry": 187.0,
+    "sl": 188.0,
+    "tp": 185.0,
+    "shares": 1000,
+    "exit_time": "11:10",
+    "exit_price": 188.0,
+    "exit_reason": "SL",
+    "pnl": -1000.0,
+    "equity_after": 101850.0,
+    "reason": {
+      "decision_time": "10:50",
+      "day_open": 207.0,
+      "pct_move_at_decision": -9.66,
+      "range_high": 191.0,
+      "range_low": 187.0,
+      "breakout_time": "10:58",
+      "breakout_close": 186.0,
+      "rel_volume": 30.04,
+      "gap_reason": "前トレード(2459.T)がSLで決済(10:50)後、直後に新条件成立。4599.Tが新たにトレンド一致+出来高+ブレイク条件を満たしたため再エントリー。",
+      "top3": [
+        {
+          "ticker": "6203.T",
+          "name": "豊和工業(株)",
+          "pct": 23.87,
+          "relvol": 3.33
+        },
+        {
+          "ticker": "4667.T",
+          "name": "アイサンテクノロジー(株)",
+          "pct": 13.81,
+          "relvol": 2.07
+        },
+        {
+          "ticker": "6208.T",
+          "name": "(株)石川製作所",
+          "pct": 13.15,
+          "relvol": 24.71
+        }
+      ]
+    }
+  },
+  {
+    "date": "2026-09-11",
+    "ticker": "9082.T",
+    "name": "大和自動車交通(株)",
+    "dir": "SHORT",
+    "entry_time": "11:18",
+    "entry": 2610.0,
+    "sl": 2625.0,
+    "tp": 2580.0,
+    "shares": 100,
+    "exit_time": "11:22",
+    "exit_price": 2625.0,
+    "exit_reason": "SL",
+    "pnl": -1500.0,
+    "equity_after": 100350.0,
+    "reason": {
+      "decision_time": "10:58",
+      "day_open": 3035.0,
+      "pct_move_at_decision": -13.34,
+      "range_high": 2696.0,
+      "range_low": 2614.0,
+      "breakout_time": "11:16",
+      "breakout_close": 2610.0,
+      "rel_volume": 245.62,
+      "gap_reason": "前トレード(4599.T)がSLで決済(11:10)後、直後に新条件成立。9082.Tが新たにトレンド一致+出来高+ブレイク条件を満たしたため再エントリー。",
+      "top3": [
+        {
+          "ticker": "6208.T",
+          "name": "(株)石川製作所",
+          "pct": 21.22,
+          "relvol": 52.32
+        },
+        {
+          "ticker": "4274.T",
+          "name": "細谷火工(株)",
+          "pct": 19.98,
+          "relvol": 104.4
+        },
+        {
+          "ticker": "9082.T",
+          "name": "大和自動車交通(株)",
+          "pct": -13.34,
+          "relvol": 245.62
+        }
+      ]
+    }
+  },
+  {
+    "date": "2026-09-11",
+    "ticker": "5533.T",
+    "name": "(株)エリッツホールディングス",
+    "dir": "LONG",
+    "entry_time": "11:28",
+    "entry": 2300.0,
+    "sl": 2299.0,
+    "tp": 2302.0,
+    "shares": 100,
+    "exit_time": "12:30",
+    "exit_price": 2299.0,
+    "exit_reason": "SL",
+    "pnl": -100.0,
+    "equity_after": 100250.0,
+    "reason": {
+      "decision_time": "10:58",
+      "day_open": 2166.0,
+      "pct_move_at_decision": 5.36,
+      "range_high": 2282.0,
+      "range_low": 2270.0,
+      "breakout_time": "11:26",
+      "breakout_close": 2299.0,
+      "rel_volume": 3.6,
+      "gap_reason": "前トレード(9082.T)がSLで決済(11:22)後、直後に新条件成立。5533.Tが新たにトレンド一致+出来高+ブレイク条件を満たしたため再エントリー。",
+      "top3": [
+        {
+          "ticker": "6208.T",
+          "name": "(株)石川製作所",
+          "pct": 15.47,
+          "relvol": 78.09
+        },
+        {
+          "ticker": "4381.T",
+          "name": "ビープラッツ(株)",
+          "pct": 15.19,
+          "relvol": 4.24
+        },
+        {
+          "ticker": "4274.T",
+          "name": "細谷火工(株)",
+          "pct": 12.57,
+          "relvol": 172.15
+        }
+      ]
+    }
+  },
+  {
+    "date": "2026-09-11",
+    "ticker": "4599.T",
+    "name": "(株)ステムリム",
+    "dir": "SHORT",
+    "entry_time": "13:48",
+    "entry": 185.0,
+    "sl": 188.0,
+    "tp": 179.0,
+    "shares": 300,
+    "exit_time": "13:54",
+    "exit_price": 179.0,
+    "exit_reason": "TP",
+    "pnl": 1800.0,
+    "equity_after": 102050.0,
+    "reason": {
+      "decision_time": "13:30",
+      "day_open": 207.0,
+      "pct_move_at_decision": -9.66,
+      "range_high": 188.0,
+      "range_low": 186.0,
+      "breakout_time": "13:46",
+      "breakout_close": 184.0,
+      "rel_volume": 21.83,
+      "gap_reason": "前トレード(5533.T)がSLで決済(12:30)後、12:30時点: トレンド一致銘柄なし、静観継続; 13:00時点: 候補アライドアーキテクツ(株),豊和工業(株),細谷火工(株)を検討したがブレイク不成立/資金管理条件未達、静観継続。4599.Tが新たにトレンド一致+出来高+ブレイク条件を満たしたため再エントリー。",
+      "top3": [
+        {
+          "ticker": "6081.T",
+          "name": "アライドアーキテクツ(株)",
+          "pct": 25.66,
+          "relvol": 98.06
+        },
+        {
+          "ticker": "4381.T",
+          "name": "ビープラッツ(株)",
+          "pct": 21.94,
+          "relvol": 7.16
+        },
+        {
+          "ticker": "9082.T",
+          "name": "大和自動車交通(株)",
+          "pct": -17.33,
+          "relvol": 142.58
+        }
+      ]
+    }
+  },
+  {
+    "date": "2026-09-11",
+    "ticker": "2929.T",
+    "name": "(株)ファーマフーズ",
+    "dir": "LONG",
+    "entry_time": "13:58",
+    "entry": 672.0,
+    "sl": 661.0,
+    "tp": 694.0,
+    "shares": 100,
+    "exit_time": "14:16",
+    "exit_price": 694.0,
+    "exit_reason": "TP",
+    "pnl": 2200.0,
+    "equity_after": 104250.0,
+    "reason": {
+      "decision_time": "13:54",
+      "day_open": 622.0,
+      "pct_move_at_decision": 6.59,
+      "range_high": 669.0,
+      "range_low": 614.0,
+      "breakout_time": "13:56",
+      "breakout_close": 673.0,
+      "rel_volume": 4.72,
+      "gap_reason": "前トレード(4599.T)がTPで決済(13:54)後、直後に新条件成立。2929.Tが新たにトレンド一致+出来高+ブレイク条件を満たしたため再エントリー。",
+      "top3": [
+        {
+          "ticker": "6081.T",
+          "name": "アライドアーキテクツ(株)",
+          "pct": 27.63,
+          "relvol": 122.26
+        },
+        {
+          "ticker": "9082.T",
+          "name": "大和自動車交通(株)",
+          "pct": -17.59,
+          "relvol": 141.09
+        },
+        {
+          "ticker": "4599.T",
+          "name": "(株)ステムリム",
+          "pct": -12.56,
+          "relvol": 23.34
         }
       ]
     }
