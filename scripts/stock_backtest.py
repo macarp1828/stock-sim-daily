@@ -47,6 +47,7 @@ _now_jst = datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=9)))
 END_DATE = min((_now_jst - datetime.timedelta(days=1)).date(), FINAL_DATE)
 MAX_CANDIDATES_TRIED = 8
 VOL_SURGE = 1.3
+MAX_TRADES_PER_DAY = 1  # see rationale at the break below -- data-driven, 2026-09-13
 
 
 def load_ticker(ticker):
@@ -313,6 +314,13 @@ def main():
             day_trade_count += 1
             prior_exit = (found["ticker"], found["exit_reason"], found["exit_time"])
             scan_ts = found_exit_ts
+
+            if day_trade_count >= MAX_TRADES_PER_DAY:
+                # Backtest evidence (2026-09-13, v4 vs v3): same-day re-entries averaged a
+                # loss (-57/trade over 21 trades) while each day's first qualifying trade
+                # averaged a solid win (+606/trade over 9 trades). Chasing more trades per
+                # day was diluting -- not growing -- total profit, so re-entries are capped.
+                break
 
         if day_trade_count == 0:
             skipped_days.append(d.isoformat())
