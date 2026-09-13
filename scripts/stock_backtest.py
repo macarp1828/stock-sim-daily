@@ -38,7 +38,11 @@ BREAKOUT_WINDOW = datetime.timedelta(minutes=60)  # only take a breakout that co
 LAST_ENTRY_TIME = datetime.time(14, 30)
 FORCE_CLOSE_TIME = datetime.time(15, 25)
 START_DATE = datetime.date(2026, 9, 1)
-END_DATE = datetime.date(2026, 9, 11)
+FINAL_DATE = datetime.date(2026, 9, 30)  # comparison period hard stop
+# END_DATE = "yesterday in JST" each time this runs, capped at FINAL_DATE, so a fresh run
+# always picks up the most recently completed trading day without manual editing.
+_now_jst = datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=9)))
+END_DATE = min((_now_jst - datetime.timedelta(days=1)).date(), FINAL_DATE)
 MAX_CANDIDATES_TRIED = 8  # try up to this many top movers per day before giving up
 
 

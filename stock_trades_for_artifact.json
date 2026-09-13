@@ -1,0 +1,362 @@
+[
+  {
+    "date": "2026-09-01",
+    "ticker": "6178.T",
+    "name": "日本郵政",
+    "dir": "LONG",
+    "entry_time": "10:26",
+    "entry": 2518.5,
+    "sl": 2507.0,
+    "tp": 2541.5,
+    "shares": 100,
+    "exit_time": "14:28",
+    "exit_price": 2541.5,
+    "exit_reason": "TP",
+    "pnl": 2300.0,
+    "equity_after": 102300.0,
+    "reason": {
+      "decision_time": "10:00",
+      "day_open": 2456.5,
+      "pct_move_at_decision": 2.16,
+      "breakout_time": "10:24",
+      "breakout_close": 2518.5,
+      "rank_among_movers": 5,
+      "rel_volume": 1.99,
+      "top3": [
+        {
+          "ticker": "4667.T",
+          "name": "アイサンテクノロジー(株)",
+          "pct": -6.37,
+          "relvol": 4.1
+        },
+        {
+          "ticker": "4382.T",
+          "name": "HEROZ",
+          "pct": -2.39,
+          "relvol": 2.34
+        },
+        {
+          "ticker": "9501.T",
+          "name": "東京電力HD",
+          "pct": 2.35,
+          "relvol": 1.63
+        }
+      ]
+    }
+  },
+  {
+    "date": "2026-09-02",
+    "ticker": "9130.T",
+    "name": "共栄タンカー(株)",
+    "dir": "SHORT",
+    "entry_time": "10:12",
+    "entry": 1590.0,
+    "sl": 1605.0,
+    "tp": 1560.0,
+    "shares": 100,
+    "exit_time": "13:08",
+    "exit_price": 1560.0,
+    "exit_reason": "TP",
+    "pnl": 3000.0,
+    "equity_after": 105300.0,
+    "reason": {
+      "decision_time": "10:00",
+      "day_open": 1687.0,
+      "pct_move_at_decision": -5.16,
+      "breakout_time": "10:08",
+      "breakout_close": 1590.0,
+      "rank_among_movers": 4,
+      "rel_volume": 3.35,
+      "top3": [
+        {
+          "ticker": "4976.T",
+          "name": "東洋ドライルーブ(株)",
+          "pct": 12.87,
+          "relvol": 30.6
+        },
+        {
+          "ticker": "4667.T",
+          "name": "アイサンテクノロジー(株)",
+          "pct": 11.19,
+          "relvol": 1.32
+        },
+        {
+          "ticker": "5711.T",
+          "name": "三菱マテリアル",
+          "pct": -5.38,
+          "relvol": 1.35
+        }
+      ]
+    }
+  },
+  {
+    "date": "2026-09-03",
+    "ticker": "6081.T",
+    "name": "アライドアーキテクツ(株)",
+    "dir": "SHORT",
+    "entry_time": "10:46",
+    "entry": 151.0,
+    "sl": 157.0,
+    "tp": 139.0,
+    "shares": 200,
+    "exit_time": "15:24",
+    "exit_price": 153.0,
+    "exit_reason": "大引け前手仕舞い",
+    "pnl": -400.0,
+    "equity_after": 104900.0,
+    "reason": {
+      "decision_time": "10:00",
+      "day_open": 163.0,
+      "pct_move_at_decision": -4.29,
+      "breakout_time": "10:44",
+      "breakout_close": 151.0,
+      "rank_among_movers": 2,
+      "rel_volume": 2.49,
+      "top3": [
+        {
+          "ticker": "4976.T",
+          "name": "東洋ドライルーブ(株)",
+          "pct": -5.33,
+          "relvol": 4.5
+        },
+        {
+          "ticker": "6081.T",
+          "name": "アライドアーキテクツ(株)",
+          "pct": -4.29,
+          "relvol": 2.49
+        },
+        {
+          "ticker": "3187.T",
+          "name": "(株)ミラタップ",
+          "pct": 3.98,
+          "relvol": 5.8
+        }
+      ]
+    }
+  },
+  {
+    "date": "2026-09-04",
+    "ticker": "3187.T",
+    "name": "(株)ミラタップ",
+    "dir": "LONG",
+    "entry_time": "10:46",
+    "entry": 388.0,
+    "sl": 378.0,
+    "tp": 408.0,
+    "shares": 100,
+    "exit_time": "13:10",
+    "exit_price": 378.0,
+    "exit_reason": "SL",
+    "pnl": -1000.0,
+    "equity_after": 103900.0,
+    "reason": {
+      "decision_time": "09:56",
+      "day_open": 362.0,
+      "pct_move_at_decision": 4.97,
+      "breakout_time": "10:44",
+      "breakout_close": 388.0,
+      "rank_among_movers": 2,
+      "rel_volume": 3.03,
+      "top3": [
+        {
+          "ticker": "2764.T",
+          "name": "(株)ひらまつ",
+          "pct": 5.0,
+          "relvol": 1.49
+        },
+        {
+          "ticker": "3187.T",
+          "name": "(株)ミラタップ",
+          "pct": 4.97,
+          "relvol": 3.03
+        },
+        {
+          "ticker": "8058.T",
+          "name": "三菱商事",
+          "pct": -3.02,
+          "relvol": 2.94
+        }
+      ]
+    }
+  },
+  {
+    "date": "2026-09-08",
+    "ticker": "7276.T",
+    "name": "小糸製作所",
+    "dir": "SHORT",
+    "entry_time": "10:22",
+    "entry": 2646.5,
+    "sl": 2659.5,
+    "tp": 2620.5,
+    "shares": 100,
+    "exit_time": "12:34",
+    "exit_price": 2620.5,
+    "exit_reason": "TP",
+    "pnl": 2600.0,
+    "equity_after": 106500.0,
+    "reason": {
+      "decision_time": "10:00",
+      "day_open": 2712.5,
+      "pct_move_at_decision": -2.03,
+      "breakout_time": "10:20",
+      "breakout_close": 2647.0,
+      "rank_among_movers": 4,
+      "rel_volume": 1.47,
+      "top3": [
+        {
+          "ticker": "9984.T",
+          "name": "ソフトバンクグループ",
+          "pct": 5.09,
+          "relvol": 2.59
+        },
+        {
+          "ticker": "1783.T",
+          "name": "(株)ｆａｎｔａｓｉｓｔａ",
+          "pct": 4.92,
+          "relvol": 40.83
+        },
+        {
+          "ticker": "6203.T",
+          "name": "豊和工業(株)",
+          "pct": -4.74,
+          "relvol": 25.83
+        }
+      ]
+    }
+  },
+  {
+    "date": "2026-09-09",
+    "ticker": "2432.T",
+    "name": "DeNA",
+    "dir": "SHORT",
+    "entry_time": "10:04",
+    "entry": 2540.0,
+    "sl": 2544.0,
+    "tp": 2532.0,
+    "shares": 100,
+    "exit_time": "10:28",
+    "exit_price": 2532.0,
+    "exit_reason": "TP",
+    "pnl": 800.0,
+    "equity_after": 107300.0,
+    "reason": {
+      "decision_time": "10:00",
+      "day_open": 2610.5,
+      "pct_move_at_decision": -2.7,
+      "breakout_time": "10:02",
+      "breakout_close": 2539.5,
+      "rank_among_movers": 5,
+      "rel_volume": 1.38,
+      "top3": [
+        {
+          "ticker": "4667.T",
+          "name": "アイサンテクノロジー(株)",
+          "pct": 21.6,
+          "relvol": 1.33
+        },
+        {
+          "ticker": "6273.T",
+          "name": "SMC",
+          "pct": 3.87,
+          "relvol": 1.97
+        },
+        {
+          "ticker": "6696.T",
+          "name": "(株)トラース・オン・プロダクト",
+          "pct": -3.4,
+          "relvol": 2.43
+        }
+      ]
+    }
+  },
+  {
+    "date": "2026-09-10",
+    "ticker": "1783.T",
+    "name": "(株)ｆａｎｔａｓｉｓｔａ",
+    "dir": "SHORT",
+    "entry_time": "10:30",
+    "entry": 62.0,
+    "sl": 68.0,
+    "tp": 50.0,
+    "shares": 200,
+    "exit_time": "11:24",
+    "exit_price": 68.0,
+    "exit_reason": "SL",
+    "pnl": -1200.0,
+    "equity_after": 106100.0,
+    "reason": {
+      "decision_time": "10:00",
+      "day_open": 71.0,
+      "pct_move_at_decision": -7.04,
+      "breakout_time": "10:28",
+      "breakout_close": 62.0,
+      "rank_among_movers": 1,
+      "rel_volume": 4.17,
+      "top3": [
+        {
+          "ticker": "1783.T",
+          "name": "(株)ｆａｎｔａｓｉｓｔａ",
+          "pct": -7.04,
+          "relvol": 4.17
+        },
+        {
+          "ticker": "6203.T",
+          "name": "豊和工業(株)",
+          "pct": 4.76,
+          "relvol": 2.52
+        },
+        {
+          "ticker": "5533.T",
+          "name": "(株)エリッツホールディングス",
+          "pct": 2.32,
+          "relvol": 3.67
+        }
+      ]
+    }
+  },
+  {
+    "date": "2026-09-11",
+    "ticker": "4599.T",
+    "name": "(株)ステムリム",
+    "dir": "SHORT",
+    "entry_time": "10:52",
+    "entry": 187.0,
+    "sl": 194.0,
+    "tp": 173.0,
+    "shares": 200,
+    "exit_time": "15:30",
+    "exit_price": 180.0,
+    "exit_reason": "大引け前手仕舞い",
+    "pnl": 1400.0,
+    "equity_after": 107500.0,
+    "reason": {
+      "decision_time": "10:00",
+      "day_open": 207.0,
+      "pct_move_at_decision": -9.18,
+      "breakout_time": "10:50",
+      "breakout_close": 187.0,
+      "rank_among_movers": 4,
+      "rel_volume": 28.32,
+      "top3": [
+        {
+          "ticker": "6203.T",
+          "name": "豊和工業(株)",
+          "pct": 19.56,
+          "relvol": 3.75
+        },
+        {
+          "ticker": "4667.T",
+          "name": "アイサンテクノロジー(株)",
+          "pct": 9.31,
+          "relvol": 1.76
+        },
+        {
+          "ticker": "2459.T",
+          "name": "アウンコンサルティング(株)",
+          "pct": -9.18,
+          "relvol": 269.8
+        }
+      ]
+    }
+  }
+]
