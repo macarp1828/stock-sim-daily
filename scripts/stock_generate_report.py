@@ -1,7 +1,7 @@
 import pandas as pd
 import json, os, datetime
 
-OUT_DIR = "/Users/nakamurashunsuke/Desktop/Claude code/株シミュレーション"
+OUT_DIR = "/Users/nakamurashunsuke/scripts/stock-sim-daily"
 START_EQUITY = 100_000.0
 
 

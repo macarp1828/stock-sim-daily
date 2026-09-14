@@ -28,7 +28,7 @@ from growth_candidates import GROWTH as UNIVERSE_E
 
 UNIVERSE = UNIVERSE_A + UNIVERSE_B + UNIVERSE_C + UNIVERSE_D + UNIVERSE_E
 
-BASE_DIR = "/Users/nakamurashunsuke/Desktop/Claude code/株シミュレーション"
+BASE_DIR = "/Users/nakamurashunsuke/scripts/stock-sim-daily"
 RAW_DIR = os.path.join(BASE_DIR, "stock_raw")
 OUT_DIR = BASE_DIR
 

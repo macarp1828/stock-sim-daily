@@ -26,10 +26,11 @@ def export_trades_json():
         return {
             "decision_time": r["decision_time"], "day_open": r["day_open"],
             "pct_move_at_decision": r["pct_move_at_decision"],
+            "range_high": r["range_high"], "range_low": r["range_low"],
             "breakout_time": r["breakout_time"], "breakout_close": r["breakout_close"],
-            "rank_among_movers": r["rank_among_movers"],
             "rel_volume": r.get("rel_volume"),
-            "top3": [{"ticker": tt, "name": n, "pct": p, "relvol": rv} for tt, n, p, rv in r["top3"]],
+            "gap_reason": r.get("gap_reason", ""),
+            "top3": r.get("top3", []),
         }
 
     out = []

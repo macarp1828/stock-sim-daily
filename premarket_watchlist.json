@@ -1,70 +1,7 @@
 {
-  "as_of_session": "2026-09-11",
+  "as_of_session": "2026-09-14",
   "generated_note": "前日終値・前日出来高ベースの参考リスト(気配値ではない)",
   "watchlist": [
-    {
-      "ticker": "4599.T",
-      "name": "(株)ステムリム",
-      "last_session_date": "2026-09-11",
-      "prev_close": 321.0,
-      "last_close": 180.0,
-      "pct_move": -43.93,
-      "rel_volume": 16.81
-    },
-    {
-      "ticker": "6203.T",
-      "name": "豊和工業(株)",
-      "last_session_date": "2026-09-11",
-      "prev_close": 2341.0,
-      "last_close": 2844.0,
-      "pct_move": 21.49,
-      "rel_volume": 1.35
-    },
-    {
-      "ticker": "9082.T",
-      "name": "大和自動車交通(株)",
-      "last_session_date": "2026-09-11",
-      "prev_close": 2037.0,
-      "last_close": 2466.0,
-      "pct_move": 21.06,
-      "rel_volume": 38.94
-    },
-    {
-      "ticker": "6336.T",
-      "name": "(株)石井表記",
-      "last_session_date": "2026-09-11",
-      "prev_close": 1912.0,
-      "last_close": 1560.0,
-      "pct_move": -18.41,
-      "rel_volume": 32.41
-    },
-    {
-      "ticker": "3187.T",
-      "name": "(株)ミラタップ",
-      "last_session_date": "2026-09-11",
-      "prev_close": 363.0,
-      "last_close": 413.0,
-      "pct_move": 13.77,
-      "rel_volume": 15.1
-    },
-    {
-      "ticker": "2929.T",
-      "name": "(株)ファーマフーズ",
-      "last_session_date": "2026-09-11",
-      "prev_close": 622.0,
-      "last_close": 692.0,
-      "pct_move": 11.25,
-      "rel_volume": 8.93
-    },
-    {
-      "ticker": "6208.T",
-      "name": "(株)石川製作所",
-      "last_session_date": "2026-09-11",
-      "prev_close": 1670.0,
-      "last_close": 1855.0,
-      "pct_move": 11.08,
-      "rel_volume": 94.19
-    },
     {
       "ticker": "4004.T",
       "name": "レゾナックHD",
@@ -75,22 +12,85 @@
       "rel_volume": 1.89
     },
     {
-      "ticker": "7777.T",
-      "name": "(株)スリー・ディー・マトリックス",
+      "ticker": "4976.T",
+      "name": "東洋ドライルーブ(株)",
       "last_session_date": "2026-09-11",
-      "prev_close": 342.0,
-      "last_close": 379.0,
-      "pct_move": 10.82,
-      "rel_volume": 6.11
+      "prev_close": 1562.0,
+      "last_close": 1639.0,
+      "pct_move": 4.93,
+      "rel_volume": 1.37
     },
     {
-      "ticker": "1783.T",
-      "name": "(株)ｆａｎｔａｓｉｓｔａ",
+      "ticker": "9253.T",
+      "name": "スローガン(株)",
       "last_session_date": "2026-09-11",
-      "prev_close": 71.0,
-      "last_close": 78.0,
-      "pct_move": 9.86,
-      "rel_volume": 2.18
+      "prev_close": 732.0,
+      "last_close": 728.0,
+      "pct_move": -0.55,
+      "rel_volume": 2.67
+    },
+    {
+      "ticker": "7808.T",
+      "name": "(株)シー・エス・ランバー",
+      "last_session_date": "2026-09-11",
+      "prev_close": 2770.0,
+      "last_close": 2755.0,
+      "pct_move": -0.54,
+      "rel_volume": 4.63
+    },
+    {
+      "ticker": "4564.T",
+      "name": "オンコセラピー・サイエンス(株)",
+      "last_session_date": "2026-09-14",
+      "prev_close": 23.0,
+      "last_close": 23.0,
+      "pct_move": 0.0,
+      "rel_volume": 1.35
+    },
+    {
+      "ticker": "3664.T",
+      "name": "(株)ＷＩＺＥ",
+      "last_session_date": "2026-09-14",
+      "prev_close": 25.0,
+      "last_close": 25.0,
+      "pct_move": 0.0,
+      "rel_volume": 1.32
+    },
+    {
+      "ticker": "6191.T",
+      "name": "(株)エアトリ",
+      "last_session_date": "2026-09-11",
+      "prev_close": 773.0,
+      "last_close": 1073.0,
+      "pct_move": 38.81,
+      "rel_volume": null
+    },
+    {
+      "ticker": "5031.T",
+      "name": "モイ(株)",
+      "last_session_date": "2026-09-11",
+      "prev_close": 354.0,
+      "last_close": 435.0,
+      "pct_move": 22.88,
+      "rel_volume": null
+    },
+    {
+      "ticker": "4274.T",
+      "name": "細谷火工(株)",
+      "last_session_date": "2026-09-14",
+      "prev_close": 1126.0,
+      "last_close": 1253.0,
+      "pct_move": 11.28,
+      "rel_volume": null
+    },
+    {
+      "ticker": "4382.T",
+      "name": "HEROZ",
+      "last_session_date": "2026-09-14",
+      "prev_close": 755.0,
+      "last_close": 825.0,
+      "pct_move": 9.27,
+      "rel_volume": 1.03
     }
   ]
 }
